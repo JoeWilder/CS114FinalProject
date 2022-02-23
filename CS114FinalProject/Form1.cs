@@ -16,5 +16,10 @@ namespace CS114FinalProject
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
