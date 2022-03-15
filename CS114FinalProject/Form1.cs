@@ -19,7 +19,37 @@ namespace CS114FinalProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-              
+              webBrowser1.Navigate("https://my.snhu.edu/");
+            while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            webBrowser1.Document.GetElementById("input_1").InnerText = "email";
+            webBrowser1.Document.GetElementById("input_2").InnerText = "password";
+
+            System.Threading.Thread.Sleep(1000);
+
+            webBrowser1.Document.GetElementById("SubmitCreds").InvokeMember("click");
+
+            while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+
+            foreach (HtmlElement tag in webBrowser1.Document.GetElementsByTagName("a")) {
+                if (tag.GetAttribute("span") == "Campus Students")
+                {
+                    tag.InvokeMember("click");
+                }
+            }
+
+            
+
+
+            Console.WriteLine(webBrowser1.DocumentText);
+            webBrowser1.Show();
         }
     }
 }
