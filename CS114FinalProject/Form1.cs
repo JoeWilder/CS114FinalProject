@@ -82,7 +82,7 @@ namespace CS114FinalProject
 
         private void page2()
         {
-            webBrowser1.Navigate("https://my.snhu.edu/Pages/N19Students.aspx?title=Program+Evaluation&pid=ST-WBSTS10");
+            webBrowser1.Navigate("https://my.snhu.edu/coursecatalog/Lists/Sections/SectionsBySubject.aspx?View={215C6024-AB45-46EF-B9CC-ADF871654DC5}&FilterField1=SectionLocation&FilterValue1=Manchester%20New%20Hampshire");
         }
 
         private void page3()
