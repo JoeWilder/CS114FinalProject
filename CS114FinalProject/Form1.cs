@@ -19,7 +19,11 @@ namespace CS114FinalProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-              webBrowser1.Navigate("https://my.snhu.edu/");
+            Logic.setSearch( "GAD-300");
+            Logic.initRelevantTable();
+            Logic.courseCompare();
+            //jade commented out temporarily
+            /*  webBrowser1.Navigate("https://my.snhu.edu/");
             while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
             {
                 Application.DoEvents();
@@ -49,7 +53,7 @@ namespace CS114FinalProject
 
 
             Console.WriteLine(webBrowser1.DocumentText);
-            webBrowser1.Show();
+            webBrowser1.Show(); */
         }
     }
 }
