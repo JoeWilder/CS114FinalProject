@@ -62,18 +62,18 @@ namespace CS114FinalProject
              "2", "T-2", "F-2", ".", "."},
             {"CS-217-05812", "CS","217","05812", "Object Oriented Programming",
              "2", "M-11", "H-11", ".", "."},
-            {"CS-217-06800", "CS","217","06800", "Object Oriented Programming",
-             "2", "W-11", "F-11", ".", "."},
-            {"CS-231-11811", "CS","213","11811", "Database Systems",
-             "2", "M-330", "H-330", ".", "."},
-            {"CS-231-21809", "CS","213","21809", "Database Systems",
-             "2", "T-5", "H-5", ".", "."},
-            {"GAD-300-04702", "GAD","300","04702", "3D Character Rigging/Animation",
-             "2", "F-8", "F-930", ".", "."},
-            {"GAD-300-10702", "GAD","300","10702", "3D Character Rigging/Animation",
-             "2", "T-2", "F-8", ".", "."}, //altered data for comparison //
-            {"GAD-400-13703", "GAD","400","13703", "Creature Design",
-             "2", "T-11", "T-1230", ".", "."}
+            {"GAD-300-06800", "GAD","300","06800", "Object Oriented Programming",  //21//0
+             "2", "W-8", "M-8", ".", "."},
+            {"GAD-300-11811", "GAD","300","11811", "Database Systems", //22//1
+             "3", "W-8", "T1230", "F8", "."},
+            {"GAD-300-21809", "GAD","300","21809", "Database Systems", //23//2
+             "2", "W-8", "F-8", ".", "."},
+            {"GAD-300-04702", "GAD","300","04702", "3D Character Rigging/Animation", //24//3
+             "3", "W-330", "W-5", "H-5", "."},
+            {"GAD-400-10702", "GAD","400","10702", "3D Character Rigging/Animation", //25//
+             "2", "M-11", "H-11", ".", "."}, //altered data for comparison
+            {"GAD-300-13703", "GAD","300","13703", "Creature Design",//26//4
+             "2", "T-11", "H-11", ".", "."}
 
         };
 
@@ -120,77 +120,91 @@ namespace CS114FinalProject
 
             //can start at . in each row, check compat only after, and then flip digits to fill in other half without having to calculate 2x
             
-            for (int i = 0; i < matchrows.Count(); i++)
+            for (int i = 0; i < matchrows.Count(); i++)  //down rows of compat table
             {
-                for (int j = 0; j<matchrows.Count(); j++)
+                for (int j = 0; j<matchrows.Count(); j++)  //over cols of compat table.
                 {
+                    // preface to rest of logic: if i = j, thats the same section compared to itself, so "I"nvalide
                     if (i == j)
                     {
                         compat[i, j] = "I";
                     } 
-                    if (compat[i, j] == ".")
+                    else 
                     {
-                        //skip all rest, its null....
-                        return ("null reached");
-                    }
-                    else
-                    {
-                        string s_cXT = c[matchrows[j], 5];
+                        /* current number of meeting times of the constant coursesection (i), and (t) */
+                        string s_cXT = c[matchrows[i], 5];
                         int cXT = 0; //current number of times  //default = 2
-                        int sXT = 0; //number of times of the subs
-                        if(!Int32.TryParse(s_cXT, out cXT))
+
+                        if (!Int32.TryParse(s_cXT, out cXT))
                         {
                             Console.WriteLine("Error Try Again in parsing. s: " + s_cXT + ", int: " + cXT);
-                        } else
+                        }
+                        else
                         {
                             Console.WriteLine("int parsed: " + cXT);
                         }
 
-                        for(t=6; t< (6+cXT); t++)  //col 6 to LESS THAN (6+2)=8 so 7.
+                        /* current number of meeting times of the comparison coursesection (j), and (b) */
+                        string s_sXT = c[matchrows[j], 5];
+                        int sXT = 0;
+
+                        if (!Int32.TryParse(s_sXT, out sXT))
+                        {
+                            Console.WriteLine("Parse Error in loop j sXT parse.");
+                        }
+                        else  //finding number of times comparisoncoursesection meets
+                        {
+                            Console.WriteLine("int parsing in sXT =" + sXT);
+                        }
+
+                        /* will reset for each new comparison (j) */
+                        int sumcheck = 0;
+
+                        /*t: sets the current constant time block in the constantcoursesection (i) */
+                        for (t = 6; t < (6 + cXT); t++)  //col 6 to LESS THAN (6+2)=8 so 7.
                         {
                             //*//setting the current constant time block (t) (in course [i,j]) to compare all k's to 
-                            Console.WriteLine("entered t loop: t = " + t);
+                            Console.WriteLine("entered t loop: t = " + t + $" in i {i}, j{j}; current time block is i(t):" + c[matchrows[i], t]);
 
-                            for (int k = 1; k <= (matchrows.Count()); k++)  //-1?//matchrows - i (or j or invert?) will make it only do half?
+
+                            /*"same as t", iterates thru time blocks (col 6-7-8-9) OF current Comparison coursesection (j)(b) */
+                            for (int b = 6; b < (6 + sXT); b++) 
                             {
-                                Console.WriteLine("entered k loop, k = " + k);
-                                if (!Int32.TryParse((c[matchrows[j + k], 5]),out sXT )){
-                                    Console.WriteLine("Parse Error in loop k.");
-                                }else
+                                Console.WriteLine($"Entered b loop. b {b}, j {j}. i={i}, t={t}");
+                                
+                                if (c[matchrows[i], t] != c[matchrows[j], b])
                                 {
-                                    Console.WriteLine("in parsing in k loop: sXT =" + sXT);
+                                    sumcheck += 1;
+                                    Console.WriteLine($"In b loop: compat section, add to sumcheck = {sumcheck}");
+                                }
+                                else
+                                {
+                                    //timeblock same/incompatible: dont add    
+                                    Console.WriteLine("In b loop: times incompat");  //oH its comparing the same one, k isnt incremented..
                                 }
 
 
-                                for (int b = 6; b < (6 + sXT); b++) //same as t, iterates thru time blocks (col 6-7-8-9)
-                                {  //b should start at the col over (j?) so that it only compares half?
-
-                                    Console.WriteLine("Entered b loop, b = " + b);
-                                    //*//
-                                    if (c[matchrows[j], t] == c[matchrows[j + k], b])
-                                    {
-                                        compat[i, j] = "N";
-                                    }
-
-
-
-                                }//end of b
-
-                            }//end of k
-
-
-
-
-
+                            }//end of b
 
 
                         }//end of t
 
+                        Console.WriteLine("after t loop ends, before j loop ends, sum = " + sumcheck);
+                        if (sumcheck == (cXT * sXT))  //number of cycles of t * b essentially(?)
+                        {
+                            compat[i, j] = "Y";  //or [i,r] ????!!!!
+                        }
+                        else
+                        {
+                            compat[i, j] = "N";  //should this be [i, r] not j ....????.. no? bc r is the controller of the comparison course nott he OH. wait so yea??  is this still inide the r loop!? YES so...
+                        }
 
 
-                    }//end of else not i==j
 
 
+
+
+                    }//end of else
 
 
                 }//end of j loop
