@@ -210,53 +210,36 @@ namespace CS114FinalProject
                 }//end of j loop
             }//end of i loop
 
+    
+            return "k";
+        }
 
-            //PRINTING ARRAY
 
+
+        //PRINTING ARRAY
+        public static void PrintCompatTable()
+        {
+            //Header row
+            Console.Write("   ");
+            for(int d = 0; d<matchrows.Count(); d++)
+            {
+                Console.Write( d + "  " );
+
+            }
+            Console.WriteLine();
+
+            //Table Data
             for (int i = 0; i < matchrows.Count(); i++)
             {
-                for (int j = 0; j <matchrows.Count(); j++)
+                Console.Write(i + ": ");
+                for (int j = 0; j < matchrows.Count(); j++)
                 {
                     Console.Write(compat[i, j] + ", ");
                 }
                 Console.WriteLine();
             }
 
-
-
-            //num of time blocks
-            ////int XT = Int32.Parse(c[i,5]);
-            //need to set a constant to compare to out here, like each blcok will need to be the "k" to compare to all else (?)
-            //^^thats this vv i think
-            ////for(int t = 6; t<(6+XT); t++)
-            ////{
-            //c[i, t];
-            //compare to all other i's, j6-7-8-9 depending on how many XT
-
-            ////}
-            /*
-            if(!(c[i,5].Contains(".")))
-            {
-                //
-            }
-
-            for (int j = 6; j < (Int32.Parse(c[i, 5]) + 6); j++)  //time blocks, across
-            {
-                if(c[i,j] == c[i + 1, j + 1])
-                {
-
-                }
-            }
-            */
-
-        
-
-            //if (CourseA.ElementAt(i).cbOne == CourseA.ElementAt(i + 1).cbOne)
-
-
-            return "k";
         }
-
 
 
         public static void setSearch(string s)

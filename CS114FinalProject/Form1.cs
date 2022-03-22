@@ -22,6 +22,7 @@ namespace CS114FinalProject
             Logic.setSearch( "GAD-300");
             Logic.initRelevantTable();
             Logic.courseCompare();
+            Logic.PrintCompatTable();
             //jade commented out temporarily
             /*  webBrowser1.Navigate("https://my.snhu.edu/");
             while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
