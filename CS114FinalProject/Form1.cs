@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +26,14 @@ namespace CS114FinalProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Logic.setSearch( "GAD-300", "GAD-330", "GAD-400", "CS-217");
+            Logic.initRelevantTable();
+            Logic.courseCompare();
+            Logic.PrintCompatTable();
+
+
+            webBrowser1.Navigate("https://my.snhu.edu/");
+            while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
             page1();
 
 
@@ -91,6 +99,9 @@ namespace CS114FinalProject
 
             
             // Stuck here
+
+            Console.WriteLine(webBrowser1.DocumentText);
+            webBrowser1.Show(); 
 
         }
 
