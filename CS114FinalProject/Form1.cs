@@ -31,6 +31,7 @@ namespace CS114FinalProject
             Logic.courseCompare();
             Logic.PrintCompatTable();
 
+            LogicPR.PossibleSchedule();
 
             webBrowser1.Navigate("https://my.snhu.edu/");
             while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)

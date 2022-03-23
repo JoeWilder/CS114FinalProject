@@ -49,7 +49,7 @@ namespace CS114FinalProject
         //user input (iterate thru 5-6 classes input) "CS-217" format
         private static List<string> search = new List<string> ();
 
-        private static int nummatches = 0;
+        public static int nummatches = 0;
         private static List<int> matchrows = new List<int>();
 
 
