@@ -1,6 +1,6 @@
 ﻿/* Name: Logic.cs
  * Purpose: static class to hold all funcationality related to creating course comparison tables
- * Notes: 
+ * Notes: created by Jade 
  */
 using System;
 using System.Collections.Generic;
