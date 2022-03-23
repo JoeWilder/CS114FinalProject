@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* Name: Logic.cs
+ * Purpose: static class to hold all funcationality related to creating course comparison tables
+ * Notes: 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +12,7 @@ namespace CS114FinalProject
 {
     public static class Logic
     {
-
+        // outdated
         public static DayOfWeek d = DayOfWeek.Monday;
         public static int t = 1230;
 
@@ -16,6 +20,7 @@ namespace CS114FinalProject
             { "x", "X"},
             { "X", "x" }
         };
+        //outdated ^^
 
         //Logic Table - filled by comparison method (both one-time things)
         //"." is null. "Y" is compatible, "N" is non-compatible, "I" is Invalid (self comparison)
@@ -39,8 +44,7 @@ namespace CS114FinalProject
             {".", ".",".",".",".",".",".",".",".",".", ".",".",".",".",".", ".",".",".",},
             {".", ".",".",".",".",".",".",".",".",".", ".",".",".",".",".", ".",".",".",},
         } ;
-        //ideally wouldnt define size here so can be just as big as needed but. 
-
+       
 
         //user input (iterate thru 5-6 classes input) "CS-217" format
         private static List<string> search = new List<string> ();
@@ -49,7 +53,7 @@ namespace CS114FinalProject
         private static List<int> matchrows = new List<int>();
 
 
-        private static string currentCB = ""; // dead?
+        private static string currentCB = ""; // outdated
 
         //sample/altered data for comparison//
 
