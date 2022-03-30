@@ -9,6 +9,7 @@ namespace CS114FinalProject
     class SNHUcourse
     {
         private string courseData; // Raw data about this course
+        string[] splitData; // Raw split data about this course
         private string courseName;
         private string courseNum;
         private string courseSemester;
@@ -17,10 +18,6 @@ namespace CS114FinalProject
         private string courseDate;
         private string courseMajor;
 
-        string[] splitData; // Raw split data about this course
-
-
-
 
         public SNHUcourse(string courseData)
         {
@@ -28,8 +25,8 @@ namespace CS114FinalProject
             splitCourseData();
             parseCourseData();
             printCourseInformation();
-            //Console.WriteLine(courseData);
         }
+
 
         /* Split raw data into something more readable */
         public void splitCourseData()
@@ -39,25 +36,25 @@ namespace CS114FinalProject
 
         }
 
+
         /* Read the split data and store it with the correct variable */
         public void parseCourseData()
         {
-
+            //Console.WriteLine(splitData.Length);
             if (splitData.Length < 10)
             {
                 return;
             }
 
-            //Console.WriteLine(splitData.Length);
-
             if (splitData.Length == 11)
             {
+
                 courseName = splitData[0];
                 courseNum = splitData[2];
                 courseSemester = splitData[3];
                 courseProfessor = splitData[4];
                 courseLocation = splitData[5];
-                courseDate = splitData[6];
+                courseDate = "Date TBD";
                 courseMajor = splitData[8];
             }
 
@@ -66,7 +63,7 @@ namespace CS114FinalProject
                 courseName = splitData[0];
                 courseNum = splitData[2];
                 courseSemester = splitData[3];
-                courseProfessor = "TBD";
+                courseProfessor = "Professor TBD";
                 courseLocation = splitData[4];
                 courseDate = splitData[6];
                 courseMajor = splitData[9];
@@ -78,7 +75,7 @@ namespace CS114FinalProject
                 courseSemester = splitData[3];
                 courseProfessor = splitData[4];
                 courseLocation = splitData[5];
-                courseDate = splitData[6];
+                courseDate = splitData[7];
                 courseMajor = splitData[10];
             }
             else if (splitData.Length == 14)
@@ -106,35 +103,42 @@ namespace CS114FinalProject
             Console.WriteLine(courseMajor);
         }
 
+
         public string getCourseName()
         {
             return courseName;
         }
+
 
         public string getCourseNumber()
         {
             return courseNum;
         }
 
+
         public string getCourseSemester()
         {
             return courseSemester;
         }
+
 
         public string getCourseProfessor()
         {
             return courseProfessor;
         }
 
+
         public string getCourseLocation()
         {
             return courseLocation;
         }
 
+
         public string getCourseDate()
         {
             return courseDate;
         }
+
 
         public string getCourseMajor()
         {

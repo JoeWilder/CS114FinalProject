@@ -9,7 +9,7 @@ namespace CS114FinalProject
     public partial class Form1 : Form
     {
         string courseData; // Raw data about a course
-        List<SNHUcourse> courseList = new List<SNHUcourse>(); // List of SNHU course
+        List<SNHUcourse> courseList = new List<SNHUcourse>(); // List of SNHU courses
         int pageNumber = 0; // What page of the SNHU website we are on
 
 
@@ -38,16 +38,13 @@ namespace CS114FinalProject
             pageNumber++;
             if (pageNumber == 5)
             {
-                Thread.Sleep(1000);
                 navigateToCourses();
             }
 
             else if (pageNumber == 7)
             {
-                Thread.Sleep(5000);
                 navigateToCompSciMajor();
             }
-
         }
 
 
@@ -60,11 +57,9 @@ namespace CS114FinalProject
                 Application.DoEvents();
             }
 
-
             webBrowser1.Document.GetElementById("input_1").InnerText = Environment.GetEnvironmentVariable("SNHU_EMAIL"); // Set this equal to your email (string)
             webBrowser1.Document.GetElementById("input_2").InnerText = Environment.GetEnvironmentVariable("SNHU_PASS"); // Set this equal to your password (string)
             webBrowser1.Document.GetElementById("SubmitCreds").InvokeMember("click");
-
 
             foreach (HtmlElement tag in webBrowser1.Document.GetElementsByTagName("a"))
             {
@@ -81,7 +76,6 @@ namespace CS114FinalProject
         private void navigateToCourses()
         {
             webBrowser1.Navigate("https://my.snhu.edu/coursecatalog/Lists/Sections/SectionsBySubject.aspx?View={215C6024-AB45-46EF-B9CC-ADF871654DC5}&FilterField1=SectionLocation&FilterValue1=Manchester%20New%20Hampshire");
-
         }
 
 
