@@ -273,17 +273,45 @@ namespace CS114FinalProject
             return search;
         }
 
+        /*
+         * 
+         * Embedded Systems (21/22 Fall University Coll CS-328-05807)@CS-328-05807 @ 21/22 Fall University Colle @ A. Fireheart@Manchester New Hampshire @ M TH 11:00 AM - 12:15 PM; M TH  11:00 AM - 12:15 PM @ Computer Science @
+Embedded Systems (22/23 Fall University Coll CS-328-05807)@CS-328-05807@22/23 Fall University Coll@Professor TBD@Manchester New Hampshire@M TH 11:00 AM - 12:15 PM; M TH  11:00 AM - 12:15 PM@Computer Science@
+Computer Security (21/22 Spring University Col CS-331-12802)@CS-331-12802@21/22 Spring University Col@B. Bancroft@Manchester New Hampshire@W F 3:30 PM - 4:45 PM; W F  3:30 PM - 4:45 PM@Computer Science@
+Comp Soft & Operating Systems (21/22 Fall University Colle CS-361-04805)@CS-361-04805@21/22 Fall University Colle@M. Cressey@Manchester New Hampshire@T F 9:30 AM - 10:45 AM; T F  9:30 AM - 10:45 AM@Computer Science@
+Comp Soft & Operating Systems (22/23 Fall University Coll CS-361-10813)@CS-361-10813@22/23 Fall University Coll@Professor TBD@Manchester New Hampshire@T F 2:00 PM - 3:15 PM@Computer Science@
+Comp Soft & Operating Systems (21/22 Fall University Colle CS-361-19846)@CS-361-19846@21/22 Fall University Colle@A. Semenchenko@Manchester New Hampshire@Date TBD@Computer Science@
+Principles of Machine Learning (22/23 Fall University Coll CS-407-07811)@CS-407-07811@22/23 Fall University Coll@Professor TBD@Manchester New Hampshire@M TH 12:30 PM - 1:45 PM@Computer Science@
+Principles of Machine Learning (21/22 Fall University Colle CS-407-11801)@CS-407-11801@21/22 Fall University Colle@U. Datta@Manchester New Hampshire@M TH 3:30 PM - 4:45 PM; M TH  3:30 PM - 4:45 PM@Computer Science@
+Artificial Intelligence (21/22 Spring University Col CS-411-05807)@CS-411-05807@21/22 Spring University Col@U. Datta@Manchester New Hampshire@M TH 11:00 AM - 12:15 PM; M TH  11:00 AM - 12:15 PM@Computer Science@
+Software Engineering Project I (22/23 Fall University Coll CS-413-03810)@CS-413-03810@22/23 Fall University Coll@Professor TBD@Manchester New Hampshire@M W 9:30 AM - 10:45 AM@Computer Science@
+Software Engineering Project I (21/22 Fall University Colle CS-413-10801)@CS-413-10801@21/22 Fall University Colle@B. Kim@Manchester New Hampshire@T F 2:00 PM - 3:15 PM@Computer Science@
+Software Engineering Project I (21/22 Spring University Col CS-413-19805)@CS-413-19805@21/22 Spring University Col@B. Kim@Manchester New Hampshire@Date TBD@Computer Science@
+         */
+
+        private static string[] filedata;
+        private static string[,] c2;
 
         public static void formatData()
         {
+            //             File.WriteAllText("Test.txt", "Hellow World!");
+            //File.OpenRead();  
+
+            //default directory is FinalProject/bin/debug, may change when project BUILT tho?
+            filedata = File.ReadAllLines("SampleData.txt"); 
+
+            foreach (string line in filedata)
+            {
+                Console.WriteLine(line);
+
+
+            }
 
 
 
 
 
-
-
-        } 
+        }
 
 
 

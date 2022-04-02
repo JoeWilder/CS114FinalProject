@@ -22,6 +22,7 @@ namespace CS114FinalProject
             Logic.initRelevantTable();
             Logic.courseCompare();
             Logic.PrintCompatTable();
+                Logic.formatData();
         }
 
 
