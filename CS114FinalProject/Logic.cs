@@ -1,12 +1,13 @@
 ﻿/* Name: Logic.cs
  * Purpose: static class to hold all funcationality related to creating course comparison tables
- * Notes: 
+ * Notes: created by Jade 
  */
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace CS114FinalProject
 {
@@ -271,6 +272,19 @@ namespace CS114FinalProject
         {
             return search;
         }
+
+
+        public static void formatData()
+        {
+
+
+
+
+
+
+
+        } 
+
 
 
     }
