@@ -305,14 +305,16 @@ namespace CS114FinalProject
                 string currentline = filedata[l];
 
                 eos = currentline.IndexOf("(");
-                c2[l, 4] = currentline.Substring(0, eos + 1);  //Name of Course saved
+                c2[l, 4] = currentline.Substring(0, eos );  //Name of Course saved
 
                 eos = currentline.IndexOf("@"); //returns 1st occurance
                 currentline = currentline.Remove(0, (eos+1));  //starting pos, NUMBER of chars to delete, returns new string
 
                 eos = currentline.IndexOf("@"); //returns end of second section
-                c2[l, 0] = currentline.Substring(0, eos+1); //Course number (CS-114-08608) saved
+                c2[l, 0] = currentline.Substring(0, eos); //Course number (CS-114-08608) saved
                 currentline = currentline.Remove(0, eos + 1); //remove up to (inlcuding) that @
+
+
 
                 eos = currentline.IndexOf("@"); //returns end of section 3 (term)
                 currentline = currentline.Remove(0, eos + 1);
@@ -342,10 +344,10 @@ namespace CS114FinalProject
                     c2[l, 8] = ".";
                     c2[l, 9] = ".";
 
-                } 
-                else 
+                }
+                else
                 {
-                    string first; 
+                    string first;
                     string second;
 
                     string days;
@@ -353,10 +355,13 @@ namespace CS114FinalProject
                     char[] nums = new char[10] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 
                     int xt = 0;
+                    bool twoday = false;
+                    bool doubleblock = false;
+                    bool difflines = false;
 
                     if (currentline.Contains(";"))  //Remove duplicate time entries
                     {
-                        
+
                         eos = currentline.IndexOf(";");  //id 1 of length 5/max id 4
 
                         first = currentline.Substring(0, eos + 1);
@@ -374,11 +379,11 @@ namespace CS114FinalProject
 
 
                         //determine when day letters end
-                        
+
                         eos = first.IndexOfAny(nums);  //days1/2 end at first number 
                         string days1 = first.Substring(0, eos);
                         first = first.Remove(0, eos);
-                        
+
                         int eos2 = second.IndexOfAny(nums);
                         string days2 = second.Substring(0, eos);
                         second = second.Remove(0, eos2);
@@ -392,15 +397,17 @@ namespace CS114FinalProject
                         //Console.WriteLine($"first: _{first}_ adn second: _{second}_");
                         if (first.Contains(second) && days1.Contains(days2))
                         {
-                            currentline = days1 + " " + first;  
+                            currentline = days1 + " " + first;
+                        } else { //if they dont match
+                            difflines = true; 
                         }
                         days = days1;
                         times = first;
                     } else
                     {
                         //determine when day letters end
-                  
-                         eos = currentline.IndexOfAny(nums);  //returns index of first number 
+
+                        eos = currentline.IndexOfAny(nums);  //returns index of first number 
 
                         days = currentline.Substring(0, eos);
                         times = currentline.Remove(0, eos);
@@ -428,11 +435,15 @@ namespace CS114FinalProject
                         //catalog gets thurs
                         int thurs = days.IndexOf('H');
                         days = days.Remove(thurs - 1, 1);
-                    } 
+                    }
                     if (days.Contains("T "))  //T <SPACE> so TH (thursday) doesn't get grabbed here 
                     {
                         xt++;
                         Console.WriteLine("Tuesday recognized)");
+                    }
+
+                    if (xt == 2) {
+                        twoday = true;
                     }
 
                     Console.WriteLine(days + "_" + times);//
@@ -442,11 +453,19 @@ namespace CS114FinalProject
 
                     //todo; either if tree, or convert to datetime substraction, or number/placeval diffs
 
-                    string starttime = times.Substring(0, eos); 
+                    string starttime = times.Substring(0, eos);
                     string endtime = times.Remove(0, eos + 1);
-                    
+
                     DateTime startDT = DateTime.Parse(starttime);
                     DateTime endDT = DateTime.Parse(endtime);
+
+                    int marker = 0;
+                    marker = starttime.IndexOf((":"));
+                    if (marker == 1) {
+                        starttime = ('0' + starttime.Substring(marker - 1, 4));
+                    } else {
+                        starttime = starttime.Substring(marker - 2, 5);
+                    }
 
                     Console.WriteLine($"startime: _{starttime}_ and end: _{endtime}");
                     Console.WriteLine($"startDT: _{startDT}_ and endDT: _{endDT}");
@@ -457,28 +476,73 @@ namespace CS114FinalProject
                     if(span.TotalMinutes > 76)
                     {
                         xt++;
+                        doubleblock = true;
                         //look at preceding letter (s)?, and split time into 2 blocks with that day letter
 
-                        int marker = starttime.IndexOf(":");
+                        marker = starttime.IndexOf(":");
                         marker -= 2;
                         starttime = starttime.Substring(0, marker+3);  //"11:00" AM 
                         starttime = starttime.Trim(' ');
-                        //save time 1 to catalog here
 
-                        //second block (starttime reset):
+
+                        ////Save starttime 1 to Catalog here
+                        if (!twoday) //xt2 but 1 day
+                        {
+                            c2[l, 6] = (days.Substring(0, 1) + "-" + starttime);
+                        }
+
+
+
+
+
+                        //starttime now holds second block:
                         startDT = startDT.AddMinutes(90.0);
                         starttime = startDT.ToString(); //now parse out leading date etc
-                        //go to first :, back 2, delete before that, trim ant leading whitesp
+                        //go to first :, back 2, delete before that, trim any leading whitesp
 
                         marker = starttime.IndexOf(":");
                         marker -= 2;
                         starttime = starttime.Substring(marker, 5);
                         starttime = starttime.Trim(' '); //in case
 
+                        ////Save time block 2 to Catalog here
+                        if (!twoday) //xt2 but 1 day
+                        {
+                            c2[l, 7] = (days.Substring(0, 1) + "-" + starttime);
+                            c2[l,8]=".";
+                            c2[l,9]=".";
+                        }
+
+
                         Console.WriteLine("starttime of second block: _" + starttime);
                     }
-
                     c2[l, 5] = xt.ToString();  //sets XT in catalog
+
+
+                    ////Saving to Catalog
+                    if(twoday && !doubleblock)  //xt=2
+                    {
+                        c2[l, 6] = (days.Substring(0, 1) + "-" + starttime);
+                        c2[l, 7] = (days.Substring(2, 1) + "-" + starttime);
+                        c2[l,8] = ".";
+                        c2[l,9] = ".";
+                    }
+                    else if( xt == 1 && !doubleblock) //1 day 1 block
+                    {
+                        c2[l,6] = (days.Substring(0,1) + "-" + starttime);
+                        c2[l, 7] = ".";
+                        c2[l, 8] = ".";
+                        c2[l, 9] = ".";
+                    } else if (xt ==3 && doubleblock && twoday) //2 days, 1 block 1 doubleblock
+                    {
+
+                    } else if(twoday && difflines){ //2 days, 1 block at different times
+
+                    }
+                    
+
+
+
 
                 }// ^ if not blank or tbd
 
@@ -493,7 +557,7 @@ namespace CS114FinalProject
             {
                 for (int m = 0; m < (c2.GetUpperBound(1) +1); m++)
                 {
-                    Console.Write(c2[li, m]);
+                    Console.Write(c2[li, m] + "_");
                 }
                 Console.WriteLine("");
             }
