@@ -18,11 +18,13 @@ namespace CS114FinalProject
         /* Listen for form load event */
         private void Form1_Load(object sender, EventArgs e)
         {
-            Logic.setSearch("GAD-300", "GAD-330", "GAD-400", "CS-217");
-            Logic.initRelevantTable();
-            Logic.courseCompare();
+            Logic.formatData();  //run only after refreshing database/file/webscrape
+
+            Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
+            Logic.initRelevantTable();  //creates table link with only the searched-for courses
+            Logic.courseCompare();  //creates compatibility table comparing all sections of the searched-for courses
             Logic.PrintCompatTable();
-                Logic.formatData();
+                
         }
 
 

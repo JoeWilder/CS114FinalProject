@@ -23,6 +23,8 @@ namespace CS114FinalProject
         };
         //outdated ^^
 
+
+
         //Logic Table - filled by comparison method (both one-time things)
         //"." is null. "Y" is compatible, "N" is non-compatible, "I" is Invalid (self comparison)
         public static string[,] compat = new string[18,18] {
@@ -53,12 +55,13 @@ namespace CS114FinalProject
         private static int nummatches = 0;
         private static List<int> matchrows = new List<int>();
 
-
-        private static string currentCB = ""; // outdated
+        // course catalog data
+        private static string[] filedata;
+        private static string[,] c = new string[30, 10];
 
         //sample/altered data for comparison//
 
-        public static string[,] c = new string[10, 10] {  //[down, over]
+        public static string[,] ctest = new string[10, 10] {  //[down, over]
             {"FULLCODE", "CODE","NUM","SECTION", "NAME",
              "XT", "T1", "T2", "T3", "T4"},
             {"CS-217-09803", "CS","203","09803", "Soph Software Engineering",
@@ -66,7 +69,7 @@ namespace CS114FinalProject
             {"CS-217-10814", "CS","203","10814", "Soph Software Engineering",
              "2", "T-2", "F-2", ".", "."},
             {"CS-217-05812", "CS","217","05812", "Object Oriented Programming",
-             "2", "M-11", "H-11", ".", "."},
+             "2", "M-2", "F-2", ".", "."},
             {"GAD-300-06800", "GAD","300","06800", "Object Oriented Programming",  
              "2", "W-8", "M-8", ".", "."},
             {"GAD-300-11811", "GAD","300","11811", "Database Systems", 
@@ -93,24 +96,30 @@ namespace CS114FinalProject
             {
                 string course = c[i, 0];  
                 Console.WriteLine(course);
-                course = course.Remove(course.LastIndexOf("-"));
-                Console.WriteLine(course);
-                bool found = false;  //to prevent duplicate searches and prevent wasted time
-
-
-                for (int s = 0; s<search.Count(); s++)
+                if(course != null)
                 {
 
-                    if ( !found && (course == search.ElementAt(s)) )
+                    course = course.Remove(course.LastIndexOf("-"));
+                    Console.WriteLine(course);
+                    bool found = false;  //to prevent duplicate entries
+
+
+                    for (int s = 0; s < search.Count(); s++)
                     {
-                        nummatches += 1;
-                        matchrows.Add(i);
-                        found = true;
-                        Console.WriteLine("i=" + i + ". match! search was: " + getSearch());
-                        //break;  //use instead of bool? to break entire s loop if term found.
+
+                        if (!found && (course == search.ElementAt(s)))
+                        {
+                            nummatches += 1;
+                            matchrows.Add(i);
+                            found = true;
+                            Console.WriteLine("i=" + i + ". match! search was: " + course);
+                            //break;  //use instead of bool? to break entire s loop if term found.
+                        }
+
                     }
 
                 }
+                
 
 
                 //add an "if reached alphabetical AFTER last search term found, break? so doesnt search thru the ENTIRE thousands course catalog? 
@@ -151,8 +160,12 @@ namespace CS114FinalProject
                     /* skip unneeded logic if attempting self comparision */
                     if (i == j)
                     {
-                        compat[i, j] = "I";
-                    } 
+                        compat[i, j] = "I";  //invalid comparison
+                    } else if (c[matchrows[i], 6] == "TBD" || c[matchrows[j],6] == "TBD")
+                    {
+                        compat[i, j] = "U"; //unknown time
+                        compat[j, i] = "U";
+                    }
                     else 
                     {
                         /* current number of meeting times of the Constant course section (i), and (t) */
@@ -274,8 +287,6 @@ namespace CS114FinalProject
         }
 
 
-        private static string[] filedata;
-        private static string[,] c2 = new string[50,10];
 
         public static void formatData()
         {
@@ -305,13 +316,13 @@ namespace CS114FinalProject
                 string currentline = filedata[l];
 
                 eos = currentline.IndexOf("(");
-                c2[l, 4] = currentline.Substring(0, eos );  //Name of Course saved
+                c[l, 4] = currentline.Substring(0, eos );  //Name of Course saved
 
                 eos = currentline.IndexOf("@"); //returns 1st occurance
                 currentline = currentline.Remove(0, (eos+1));  //starting pos, NUMBER of chars to delete, returns new string
 
                 eos = currentline.IndexOf("@"); //returns end of second section
-                c2[l, 0] = currentline.Substring(0, eos); //Course number (CS-114-08608) saved
+                c[l, 0] = currentline.Substring(0, eos); //Course number (CS-114-08608) saved
                 currentline = currentline.Remove(0, eos + 1); //remove up to (inlcuding) that @
 
 
@@ -338,11 +349,11 @@ namespace CS114FinalProject
                 else if (currentline.Contains("Date TBD"))
                 {
                     //Setting defaults
-                    c2[l, 5] = "2";
-                    c2[l, 6] = "TBD";
-                    c2[l, 7] = "TBD";
-                    c2[l, 8] = ".";
-                    c2[l, 9] = ".";
+                    c[l, 5] = "2";
+                    c[l, 6] = "TBD";
+                    c[l, 7] = "TBD";
+                    c[l, 8] = ".";
+                    c[l, 9] = ".";
 
                 }
                 else
@@ -480,15 +491,19 @@ namespace CS114FinalProject
                         //look at preceding letter (s)?, and split time into 2 blocks with that day letter
 
                         marker = starttime.IndexOf(":");
-                        marker -= 2;
-                        starttime = starttime.Substring(0, marker+3);  //"11:00" AM 
+                        if (marker == 2){
+                            starttime = ('0' +  starttime.Substring(marker-1, 4));  //"02:00" PM 
+                        } else
+                        {
+                            starttime = starttime.Substring(marker - 2, 5);  //"11:00" AM  //m+3?
+                        }
                         starttime = starttime.Trim(' ');
 
 
                         ////Save starttime 1 to Catalog here
                         if (!twoday) //xt2 but 1 day
                         {
-                            c2[l, 6] = (days.Substring(0, 1) + "-" + starttime);
+                            c[l, 6] = (days.Substring(0, 1) + "-" + starttime);
                         }
 
 
@@ -508,31 +523,31 @@ namespace CS114FinalProject
                         ////Save time block 2 to Catalog here
                         if (!twoday) //xt2 but 1 day
                         {
-                            c2[l, 7] = (days.Substring(0, 1) + "-" + starttime);
-                            c2[l,8]=".";
-                            c2[l,9]=".";
+                            c[l, 7] = (days.Substring(0, 1) + "-" + starttime);
+                            c[l,8]=".";
+                            c[l,9]=".";
                         }
 
 
                         Console.WriteLine("starttime of second block: _" + starttime);
                     }
-                    c2[l, 5] = xt.ToString();  //sets XT in catalog
+                    c[l, 5] = xt.ToString();  //sets XT in catalog
 
 
                     ////Saving to Catalog
                     if(twoday && !doubleblock)  //xt=2
                     {
-                        c2[l, 6] = (days.Substring(0, 1) + "-" + starttime);
-                        c2[l, 7] = (days.Substring(2, 1) + "-" + starttime);
-                        c2[l,8] = ".";
-                        c2[l,9] = ".";
+                        c[l, 6] = (days.Substring(0, 1) + "-" + starttime);
+                        c[l, 7] = (days.Substring(2, 1) + "-" + starttime);
+                        c[l,8] = ".";
+                        c[l,9] = ".";
                     }
                     else if( xt == 1 && !doubleblock) //1 day 1 block
                     {
-                        c2[l,6] = (days.Substring(0,1) + "-" + starttime);
-                        c2[l, 7] = ".";
-                        c2[l, 8] = ".";
-                        c2[l, 9] = ".";
+                        c[l,6] = (days.Substring(0,1) + "-" + starttime);
+                        c[l, 7] = ".";
+                        c[l, 8] = ".";
+                        c[l, 9] = ".";
                     } else if (xt ==3 && doubleblock && twoday) //2 days, 1 block 1 doubleblock
                     {
 
@@ -553,11 +568,11 @@ namespace CS114FinalProject
             //Heading with name@full code num@term@prof@Location@times@catergory@
 
             //Print at end//temporary
-            for (int li = 0; li < (c2.GetUpperBound(0)+1); li++)
+            for (int li = 0; li < (c.GetUpperBound(0)+1); li++)
             {
-                for (int m = 0; m < (c2.GetUpperBound(1) +1); m++)
+                for (int m = 0; m < (c.GetUpperBound(1) +1); m++)
                 {
-                    Console.Write(c2[li, m] + "_");
+                    Console.Write(c[li, m] + "_");
                 }
                 Console.WriteLine("");
             }
