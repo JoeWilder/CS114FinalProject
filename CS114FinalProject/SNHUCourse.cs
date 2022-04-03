@@ -24,6 +24,7 @@ namespace CS114FinalProject
         private string courseLocation;
         private string courseDate;
         private string courseMajor;
+        private bool currentlyOffered;
         private string fileFormattedData; // Data to be stored in a file
 
 
@@ -33,6 +34,7 @@ namespace CS114FinalProject
             splitCourseData();
             parseCourseData();
             courseName = stripNewlines(courseName);
+            currentlyOffered = correctSemester();
             formatForFile();
             printCourseInformation();
         }
@@ -99,6 +101,13 @@ namespace CS114FinalProject
         }
 
 
+        public bool correctSemester()
+        {
+            if (courseSemester == null) return false;
+            return (courseSemester.StartsWith("22/23 Fall"));
+        }
+
+
         /* Strip string of newlines */
         public string stripNewlines(string str)
         {
@@ -110,7 +119,7 @@ namespace CS114FinalProject
         public void formatForFile()
         {
             fileFormattedData = courseName + " @ " + courseNum + " @ " + courseSemester + " @ " + courseProfessor +
-                " @ " + courseLocation + " @ " + courseDate + " @ " + courseMajor;
+                " @ " + courseLocation + " @ " + courseDate + " @ " + courseMajor + " @ " + "Currently offered: " + currentlyOffered;
         }
 
 
@@ -124,6 +133,7 @@ namespace CS114FinalProject
             Console.WriteLine(courseLocation);
             Console.WriteLine(courseDate);
             Console.WriteLine(courseMajor);
+            Console.WriteLine("Currently offered: " + currentlyOffered);
         }
 
 
