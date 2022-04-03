@@ -352,6 +352,7 @@ namespace CS114FinalProject
                     string times;
                     char[] nums = new char[10] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 
+                    int xt = 0;
 
                     if (currentline.Contains(";"))  //Remove duplicate time entries
                     {
@@ -411,24 +412,26 @@ namespace CS114FinalProject
 
                     if (days.Contains("M"))
                     {
-
+                        xt++;
                     }
                     if (days.Contains("W"))
                     {
-
+                        xt++;
                     }
                     if (days.Contains("F"))
                     {
-
+                        xt++;
                     }
                     if (days.Contains("TH"))
                     {
+                        xt++;
                         //catalog gets thurs
                         int thurs = days.IndexOf('H');
                         days = days.Remove(thurs - 1, 1);
                     } 
                     if (days.Contains("T "))  //T <SPACE> so TH (thursday) doesn't get grabbed here 
                     {
+                        xt++;
                         Console.WriteLine("Tuesday recognized)");
                     }
 
@@ -439,9 +442,43 @@ namespace CS114FinalProject
 
                     //todo; either if tree, or convert to datetime substraction, or number/placeval diffs
 
+                    string starttime = times.Substring(0, eos); 
+                    string endtime = times.Remove(0, eos + 1);
+                    
+                    DateTime startDT = DateTime.Parse(starttime);
+                    DateTime endDT = DateTime.Parse(endtime);
 
+                    Console.WriteLine($"startime: _{starttime}_ and end: _{endtime}");
+                    Console.WriteLine($"startDT: _{startDT}_ and endDT: _{endDT}");
 
+                    TimeSpan span = endDT.Subtract(startDT);
 
+                    ////IF TIMEBLOCK is longer than 1hr15min, add 1 to timeblock
+                    if(span.TotalMinutes > 76)
+                    {
+                        xt++;
+                        //look at preceding letter (s)?, and split time into 2 blocks with that day letter
+
+                        int marker = starttime.IndexOf(":");
+                        marker -= 2;
+                        starttime = starttime.Substring(0, marker+3);  //"11:00" AM 
+                        starttime = starttime.Trim(' ');
+                        //save time 1 to catalog here
+
+                        //second block (starttime reset):
+                        startDT = startDT.AddMinutes(90.0);
+                        starttime = startDT.ToString(); //now parse out leading date etc
+                        //go to first :, back 2, delete before that, trim ant leading whitesp
+
+                        marker = starttime.IndexOf(":");
+                        marker -= 2;
+                        starttime = starttime.Substring(marker, 5);
+                        starttime = starttime.Trim(' '); //in case
+
+                        Console.WriteLine("starttime of second block: _" + starttime);
+                    }
+
+                    c2[l, 5] = xt.ToString();  //sets XT in catalog
 
                 }// ^ if not blank or tbd
 
