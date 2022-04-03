@@ -165,12 +165,15 @@ namespace CS114FinalProject
                     {
                         compat[i, j] = "U"; //unknown time
                         compat[j, i] = "U";
+                    } else if (c[matchrows[i], 0] == null)
+                    {
+                        //skip row if blank?
                     }
                     else 
                     {
                         /* current number of meeting times of the Constant course section (i), and (t) */
                         string s_cXT = c[matchrows[i], 5];
-                        int cXT = 0; //current number of times  //default = 2
+                        int cXT = 2; 
 
                         if (!Int32.TryParse(s_cXT, out cXT)) {
                             Console.WriteLine("Error Try Again in parsing. s: " + s_cXT + ", int: " + cXT);
@@ -178,7 +181,7 @@ namespace CS114FinalProject
                             Console.WriteLine("int parsed: " + cXT);
                         }
 
-                        /* current number of meeting times of the comparison coursesection (j), and (b) */
+                        /* current number of meeting times of the compariSon coursesection (j), and (b) */
                         string s_sXT = c[matchrows[j], 5];
                         int sXT = 0;
 
@@ -290,19 +293,10 @@ namespace CS114FinalProject
 
         public static void formatData()
         {
-            int eos; //index of current  end of section
+            int eos; //index of current end of section
 
-            //             File.WriteAllText("Test.txt", "Hellow World!");
-            //File.OpenRead();
-
-            //noT going to store any info abt professor or term year?  //also consider the jagged array??
-            //Columns of c catalog 2d array are:
-            //{"FULLCODE", "CODE","NUM","SECTION", "NAME", "XT", "T1", "T2", "T3", "T4"}
-            //{CS-413-10801, CS, 413, 10801, Senior Software Engineering, 2, T2, F2, ., .
-
-            //default directory is FinalProject/bin/debug, may change when project BUILT tho?
-            //cannot have any blank lines. deleting any blank entries
-
+            //default directory is FinalProject/bin/debug, may change when project built??
+            //File Format: Name@full-code-num@term@prof@Location@times@catergory@
 
             filedata = File.ReadAllLines("SampleData.txt");  
 
@@ -318,15 +312,13 @@ namespace CS114FinalProject
                 eos = currentline.IndexOf("(");
                 c[l, 4] = currentline.Substring(0, eos );  //Name of Course saved
 
-                eos = currentline.IndexOf("@"); //returns 1st occurance
-                currentline = currentline.Remove(0, (eos+1));  //starting pos, NUMBER of chars to delete, returns new string
+                eos = currentline.IndexOf("@"); //returns 1st occurance (@ after full name)
+                currentline = currentline.Remove(0, (eos+1));  
 
                 eos = currentline.IndexOf("@"); //returns end of second section
                 c[l, 0] = currentline.Substring(0, eos); //Course number (CS-114-08608) saved
+
                 currentline = currentline.Remove(0, eos + 1); //remove up to (inlcuding) that @
-
-
-
                 eos = currentline.IndexOf("@"); //returns end of section 3 (term)
                 currentline = currentline.Remove(0, eos + 1);
                 eos = currentline.IndexOf("@"); //returns end of section 4 (prof)
@@ -334,13 +326,11 @@ namespace CS114FinalProject
                 eos = currentline.IndexOf("@"); //returns end of section 5 (location)
                 currentline = currentline.Remove(0, eos + 1);
 
-                eos = currentline.IndexOf("@"); //returns end of section 6  TIMES
+                eos = currentline.IndexOf("@"); //returns end of section 6  (TIMES)
 
-                currentline = currentline.Substring(0, eos); //cuts off end, incl last @             
+                currentline = currentline.Substring(0, eos); //cuts off end section, incl last @             
 
-                Console.WriteLine(currentline); //todo temp
-
-                //if datetime has a semicolon, check if after; contains substr of the befor;, if same, delete 1 =theyre dupes
+                Console.WriteLine(currentline); //temp
 
                 if (currentline == "" || currentline == " ")
                 {
@@ -370,23 +360,19 @@ namespace CS114FinalProject
                     bool doubleblock = false;
                     bool difflines = false;
 
-                    if (currentline.Contains(";"))  //Remove duplicate time entries
+                    //if before/after semicolon are same/contain each other, delete duplicate
+
+                    if (currentline.Contains(";")) 
                     {
+                        eos = currentline.IndexOf(";");
 
-                        eos = currentline.IndexOf(";");  //id 1 of length 5/max id 4
-
+                        //storing the part before/after in identical formatting
                         first = currentline.Substring(0, eos + 1);
                         second = currentline.Substring(eos + 1, (currentline.Length - (eos + 1)));
-
-
                         first = first.Trim(' ');
                         second = second.Trim(' ');
                         first = first.Trim(';');
                         second = second.Trim(';');
-
-                        //currentline = first + "@" + second;
-
-                        //int start2 = currentline.IndexOf("@") + 1;
 
 
                         //determine when day letters end
@@ -409,12 +395,14 @@ namespace CS114FinalProject
                         if (first.Contains(second) && days1.Contains(days2))
                         {
                             currentline = days1 + " " + first;
-                        } else { //if they dont match
+                        } else { //if they dont match  //todo incomplete-add logic here if time/priority
                             difflines = true; 
                         }
+
                         days = days1;
                         times = first;
-                    } else
+
+                    } else  
                     {
                         //determine when day letters end
 
@@ -423,9 +411,8 @@ namespace CS114FinalProject
                         days = currentline.Substring(0, eos);
                         times = currentline.Remove(0, eos);
 
-                        days = days.TrimStart(' ');
+                        days = days.TrimStart(' ');  //leave trailing spaces for T 
                         times = times.Trim(' ');
-
                     }
 
                     if (days.Contains("M"))
@@ -443,14 +430,13 @@ namespace CS114FinalProject
                     if (days.Contains("TH"))
                     {
                         xt++;
-                        //catalog gets thurs
+                        //re-writing TH into just H
                         int thurs = days.IndexOf('H');
                         days = days.Remove(thurs - 1, 1);
                     }
-                    if (days.Contains("T "))  //T <SPACE> so TH (thursday) doesn't get grabbed here 
+                    if (days.Contains("T "))  //T<SPACE> so TH (thursday) doesn't get grabbed here 
                     {
                         xt++;
-                        Console.WriteLine("Tuesday recognized)");
                     }
 
                     if (xt == 2) {
@@ -460,9 +446,8 @@ namespace CS114FinalProject
                     Console.WriteLine(days + "_" + times);//
 
                     //Determining how many blocks of time course meets for
-                    eos = times.IndexOf("-");
 
-                    //todo; either if tree, or convert to datetime substraction, or number/placeval diffs
+                    eos = times.IndexOf("-");
 
                     string starttime = times.Substring(0, eos);
                     string endtime = times.Remove(0, eos + 1);
@@ -483,12 +468,11 @@ namespace CS114FinalProject
 
                     TimeSpan span = endDT.Subtract(startDT);
 
-                    ////IF TIMEBLOCK is longer than 1hr15min, add 1 to timeblock
+                    ////IF TIMEBLOCK is longer than 1hr15min, class is double block
                     if(span.TotalMinutes > 76)
                     {
                         xt++;
                         doubleblock = true;
-                        //look at preceding letter (s)?, and split time into 2 blocks with that day letter
 
                         marker = starttime.IndexOf(":");
                         if (marker == 2){
@@ -500,28 +484,30 @@ namespace CS114FinalProject
                         starttime = starttime.Trim(' ');
 
 
-                        ////Save starttime 1 to Catalog here
-                        if (!twoday) //xt2 but 1 day
+                        //*Save starttime 1 to Catalog here*/
+                        if (!twoday) //1 day dbl block
                         {
                             c[l, 6] = (days.Substring(0, 1) + "-" + starttime);
                         }
 
-
-
-
-
                         //starttime now holds second block:
                         startDT = startDT.AddMinutes(90.0);
-                        starttime = startDT.ToString(); //now parse out leading date etc
-                        //go to first :, back 2, delete before that, trim any leading whitesp
+                        starttime = startDT.ToString(); 
 
+                        //saving just the time "00:00"
                         marker = starttime.IndexOf(":");
                         marker -= 2;
                         starttime = starttime.Substring(marker, 5);
-                        starttime = starttime.Trim(' '); //in case
+                        starttime = starttime.Trim(' ');
 
-                        ////Save time block 2 to Catalog here
-                        if (!twoday) //xt2 but 1 day
+                        //add leading 0 if 1 digit hour
+                        marker = starttime.IndexOf(":");
+                        if (marker == 1)
+                            starttime = ('0' + starttime);
+
+
+                        //* Saving time block 2 to Catalog here */
+                        if (!twoday) //1 day dbl block
                         {
                             c[l, 7] = (days.Substring(0, 1) + "-" + starttime);
                             c[l,8]=".";
@@ -531,10 +517,10 @@ namespace CS114FinalProject
 
                         Console.WriteLine("starttime of second block: _" + starttime);
                     }
-                    c[l, 5] = xt.ToString();  //sets XT in catalog
+                    c[l, 5] = xt.ToString();  //* saves XT in catalog */
 
 
-                    ////Saving to Catalog
+                    //*Saving to Catalog */
                     if(twoday && !doubleblock)  //xt=2
                     {
                         c[l, 6] = (days.Substring(0, 1) + "-" + starttime);
@@ -552,20 +538,18 @@ namespace CS114FinalProject
                     {
 
                     } else if(twoday && difflines){ //2 days, 1 block at different times
-
+                        //see semicolor elseif above
                     }
                     
 
 
 
 
-                }// ^ if not blank or tbd
+                }//if not blank or tbd
 
 
-            } //end of l loop (each line)
+            } //end of l(ine) loop
 
-
-            //Heading with name@full code num@term@prof@Location@times@catergory@
 
             //Print at end//temporary
             for (int li = 0; li < (c.GetUpperBound(0)+1); li++)

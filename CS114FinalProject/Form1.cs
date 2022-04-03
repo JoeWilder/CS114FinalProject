@@ -21,7 +21,7 @@ namespace CS114FinalProject
             Logic.formatData();  //run only after refreshing database/file/webscrape
 
             Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
-            Logic.initRelevantTable();  //creates table link with only the searched-for courses
+            Logic.initRelevantTable();  //creates linker table with only the searched-for courses
             Logic.courseCompare();  //creates compatibility table comparing all sections of the searched-for courses
             Logic.PrintCompatTable();
                 
