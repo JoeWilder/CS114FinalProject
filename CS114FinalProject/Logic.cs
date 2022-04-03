@@ -273,42 +273,191 @@ namespace CS114FinalProject
             return search;
         }
 
-        /*
-         * 
-         * Embedded Systems (21/22 Fall University Coll CS-328-05807)@CS-328-05807 @ 21/22 Fall University Colle @ A. Fireheart@Manchester New Hampshire @ M TH 11:00 AM - 12:15 PM; M TH  11:00 AM - 12:15 PM @ Computer Science @
-Embedded Systems (22/23 Fall University Coll CS-328-05807)@CS-328-05807@22/23 Fall University Coll@Professor TBD@Manchester New Hampshire@M TH 11:00 AM - 12:15 PM; M TH  11:00 AM - 12:15 PM@Computer Science@
-Computer Security (21/22 Spring University Col CS-331-12802)@CS-331-12802@21/22 Spring University Col@B. Bancroft@Manchester New Hampshire@W F 3:30 PM - 4:45 PM; W F  3:30 PM - 4:45 PM@Computer Science@
-Comp Soft & Operating Systems (21/22 Fall University Colle CS-361-04805)@CS-361-04805@21/22 Fall University Colle@M. Cressey@Manchester New Hampshire@T F 9:30 AM - 10:45 AM; T F  9:30 AM - 10:45 AM@Computer Science@
-Comp Soft & Operating Systems (22/23 Fall University Coll CS-361-10813)@CS-361-10813@22/23 Fall University Coll@Professor TBD@Manchester New Hampshire@T F 2:00 PM - 3:15 PM@Computer Science@
-Comp Soft & Operating Systems (21/22 Fall University Colle CS-361-19846)@CS-361-19846@21/22 Fall University Colle@A. Semenchenko@Manchester New Hampshire@Date TBD@Computer Science@
-Principles of Machine Learning (22/23 Fall University Coll CS-407-07811)@CS-407-07811@22/23 Fall University Coll@Professor TBD@Manchester New Hampshire@M TH 12:30 PM - 1:45 PM@Computer Science@
-Principles of Machine Learning (21/22 Fall University Colle CS-407-11801)@CS-407-11801@21/22 Fall University Colle@U. Datta@Manchester New Hampshire@M TH 3:30 PM - 4:45 PM; M TH  3:30 PM - 4:45 PM@Computer Science@
-Artificial Intelligence (21/22 Spring University Col CS-411-05807)@CS-411-05807@21/22 Spring University Col@U. Datta@Manchester New Hampshire@M TH 11:00 AM - 12:15 PM; M TH  11:00 AM - 12:15 PM@Computer Science@
-Software Engineering Project I (22/23 Fall University Coll CS-413-03810)@CS-413-03810@22/23 Fall University Coll@Professor TBD@Manchester New Hampshire@M W 9:30 AM - 10:45 AM@Computer Science@
-Software Engineering Project I (21/22 Fall University Colle CS-413-10801)@CS-413-10801@21/22 Fall University Colle@B. Kim@Manchester New Hampshire@T F 2:00 PM - 3:15 PM@Computer Science@
-Software Engineering Project I (21/22 Spring University Col CS-413-19805)@CS-413-19805@21/22 Spring University Col@B. Kim@Manchester New Hampshire@Date TBD@Computer Science@
-         */
 
         private static string[] filedata;
-        private static string[,] c2;
+        private static string[,] c2 = new string[50,10];
 
         public static void formatData()
         {
+            int eos; //index of current  end of section
+
             //             File.WriteAllText("Test.txt", "Hellow World!");
-            //File.OpenRead();  
+            //File.OpenRead();
+
+            //noT going to store any info abt professor or term year?  //also consider the jagged array??
+            //Columns of c catalog 2d array are:
+            //{"FULLCODE", "CODE","NUM","SECTION", "NAME", "XT", "T1", "T2", "T3", "T4"}
+            //{CS-413-10801, CS, 413, 10801, Senior Software Engineering, 2, T2, F2, ., .
 
             //default directory is FinalProject/bin/debug, may change when project BUILT tho?
-            filedata = File.ReadAllLines("SampleData.txt"); 
+            //cannot have any blank lines. deleting any blank entries
+
+
+            filedata = File.ReadAllLines("SampleData.txt");  
 
             foreach (string line in filedata)
             {
                 Console.WriteLine(line);
-
-
             }
 
+            for (int l = 0; l < filedata.Count(); l++)
+            {
+                string currentline = filedata[l];
+
+                eos = currentline.IndexOf("(");
+                c2[l, 4] = currentline.Substring(0, eos + 1);  //Name of Course saved
+
+                eos = currentline.IndexOf("@"); //returns 1st occurance
+                currentline = currentline.Remove(0, (eos+1));  //starting pos, NUMBER of chars to delete, returns new string
+
+                eos = currentline.IndexOf("@"); //returns end of second section
+                c2[l, 0] = currentline.Substring(0, eos+1); //Course number (CS-114-08608) saved
+                currentline = currentline.Remove(0, eos + 1); //remove up to (inlcuding) that @
+
+                eos = currentline.IndexOf("@"); //returns end of section 3 (term)
+                currentline = currentline.Remove(0, eos + 1);
+                eos = currentline.IndexOf("@"); //returns end of section 4 (prof)
+                currentline = currentline.Remove(0, eos + 1);
+                eos = currentline.IndexOf("@"); //returns end of section 5 (location)
+                currentline = currentline.Remove(0, eos + 1);
+
+                eos = currentline.IndexOf("@"); //returns end of section 6  TIMES
+
+                currentline = currentline.Substring(0, eos); //cuts off end, incl last @             
+
+                Console.WriteLine(currentline); //todo temp
+
+                //if datetime has a semicolon, check if after; contains substr of the befor;, if same, delete 1 =theyre dupes
+
+                if (currentline == "" || currentline == " ")
+                {
+                    break;
+                }
+                else if (currentline.Contains("Date TBD"))
+                {
+                    //Setting defaults
+                    c2[l, 5] = "2";
+                    c2[l, 6] = "TBD";
+                    c2[l, 7] = "TBD";
+                    c2[l, 8] = ".";
+                    c2[l, 9] = ".";
+
+                } 
+                else 
+                {
+                    string first; 
+                    string second;
+
+                    string days;
+                    string times;
+                    char[] nums = new char[10] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 
 
+                    if (currentline.Contains(";"))  //Remove duplicate time entries
+                    {
+                        
+                        eos = currentline.IndexOf(";");  //id 1 of length 5/max id 4
+
+                        first = currentline.Substring(0, eos + 1);
+                        second = currentline.Substring(eos + 1, (currentline.Length - (eos + 1)));
+
+
+                        first = first.Trim(' ');
+                        second = second.Trim(' ');
+                        first = first.Trim(';');
+                        second = second.Trim(';');
+
+                        //currentline = first + "@" + second;
+
+                        //int start2 = currentline.IndexOf("@") + 1;
+
+
+                        //determine when day letters end
+                        
+                        eos = first.IndexOfAny(nums);  //days1/2 end at first number 
+                        string days1 = first.Substring(0, eos);
+                        first = first.Remove(0, eos);
+                        
+                        int eos2 = second.IndexOfAny(nums);
+                        string days2 = second.Substring(0, eos);
+                        second = second.Remove(0, eos2);
+
+                        days1 = days1.Trim(' ');
+                        days2 = days2.Trim(' ');
+                        first = first.Trim(' ');
+                        second = second.Trim(' ');
+                        //now first/second are times, days1/2 are days
+
+                        //Console.WriteLine($"first: _{first}_ adn second: _{second}_");
+                        if (first.Contains(second) && days1.Contains(days2))
+                        {
+                            currentline = days1 + " " + first;  
+                        }
+                        days = days1;
+                        times = first;
+                    } else
+                    {
+                        //determine when day letters end
+                  
+                         eos = currentline.IndexOfAny(nums);  //returns index of first number 
+
+                        days = currentline.Substring(0, eos);
+                        times = currentline.Remove(0, eos);
+
+                        days = days.Trim(' ');
+                        times = times.Trim(' ');
+
+                    }
+
+                    if (days.Contains("M"))
+                    {
+
+                    }
+                    if (days.Contains("TH"))
+                    {
+                        //catalog gets thurs
+                        int thurs = days.IndexOf('H');
+                        days = days.Remove(thurs - 1, 1);
+                    }
+                    if (days.Contains("T "))  //T <SPACE> ensures TH (thursday) doesn't get grabbed here 
+                    {
+
+                    }
+                    if (days.Contains("W"))
+                    {
+
+                    }
+                    if (days.Contains("F"))
+                    {
+
+                    }
+
+                    Console.WriteLine(days + times);
+
+                }
+
+
+
+
+
+
+
+
+
+            } //end of l loop (each line)
+
+
+            //Heading with name@full code num@term@prof@Location@times@catergory@
+
+            //Print at end
+            for (int li = 0; li < (c2.GetUpperBound(0)+1); li++)
+            {
+                for (int m = 0; m < (c2.GetUpperBound(1) +1); m++)
+                {
+                    Console.Write(c2[li, m]);
+                }
+                Console.WriteLine("");
+            }
 
 
         }
