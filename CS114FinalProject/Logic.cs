@@ -382,8 +382,8 @@ namespace CS114FinalProject
                         string days2 = second.Substring(0, eos);
                         second = second.Remove(0, eos2);
 
-                        days1 = days1.Trim(' ');
-                        days2 = days2.Trim(' ');
+                        days1 = days1.TrimStart(' ');
+                        days2 = days2.TrimStart(' ');
                         first = first.Trim(' ');
                         second = second.Trim(' ');
                         //now first/second are times, days1/2 are days
@@ -404,22 +404,12 @@ namespace CS114FinalProject
                         days = currentline.Substring(0, eos);
                         times = currentline.Remove(0, eos);
 
-                        days = days.Trim(' ');
+                        days = days.TrimStart(' ');
                         times = times.Trim(' ');
 
                     }
 
                     if (days.Contains("M"))
-                    {
-
-                    }
-                    if (days.Contains("TH"))
-                    {
-                        //catalog gets thurs
-                        int thurs = days.IndexOf('H');
-                        days = days.Remove(thurs - 1, 1);
-                    }
-                    if (days.Contains("T "))  //T <SPACE> ensures TH (thursday) doesn't get grabbed here 
                     {
 
                     }
@@ -431,17 +421,29 @@ namespace CS114FinalProject
                     {
 
                     }
+                    if (days.Contains("TH"))
+                    {
+                        //catalog gets thurs
+                        int thurs = days.IndexOf('H');
+                        days = days.Remove(thurs - 1, 1);
+                    } 
+                    if (days.Contains("T "))  //T <SPACE> so TH (thursday) doesn't get grabbed here 
+                    {
+                        Console.WriteLine("Tuesday recognized)");
+                    }
 
-                    Console.WriteLine(days + times);
+                    Console.WriteLine(days + "_" + times);//
 
-                }
+                    //Determining how many blocks of time course meets for
+                    eos = times.IndexOf("-");
 
-
-
-
-
+                    //todo; either if tree, or convert to datetime substraction, or number/placeval diffs
 
 
+
+
+
+                }// ^ if not blank or tbd
 
 
             } //end of l loop (each line)
@@ -449,7 +451,7 @@ namespace CS114FinalProject
 
             //Heading with name@full code num@term@prof@Location@times@catergory@
 
-            //Print at end
+            //Print at end//temporary
             for (int li = 0; li < (c2.GetUpperBound(0)+1); li++)
             {
                 for (int m = 0; m < (c2.GetUpperBound(1) +1); m++)
