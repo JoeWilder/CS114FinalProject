@@ -108,7 +108,7 @@ namespace CS114FinalProject
                         courseData += childtag.InnerText;
                         courseData += "\n";
                     }
-                    if (courseData == null) continue;
+                    if (String.IsNullOrEmpty(courseData)) continue;
                     SNHUcourse course = new SNHUcourse(courseData);
                     courseList.Add(course);
                 }
