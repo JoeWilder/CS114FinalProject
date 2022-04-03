@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*******************************************
+Program: WebbrowserForm.cs
+Purpose: Winform for scraping SNHU course data from the web
+Author: Joseph Wilder
+Date: April 4, 2022
+********************************************/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace CS114FinalProject
 {
@@ -86,7 +94,7 @@ namespace CS114FinalProject
         /* Wait until classes are loaded, then save the data */
         private async void waitForCoursesToLoad()
         {
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             foreach (HtmlElement tag in webBrowser1.Document.GetElementById("tbod1-15__").Children)
             {
                 if (tag.CanHaveChildren)
@@ -110,6 +118,23 @@ namespace CS114FinalProject
             }
             webBrowser1.Dispose();
             Close();
+            saveDataToFile();
         }
+
+
+        /* Overwrite data to coursedata.txt */
+        public void saveDataToFile()
+        {
+            Console.WriteLine("Saving data to text file");
+            List<string> linesOfData = new List<string>(); // List of all lines
+            String filePath = AppDomain.CurrentDomain.BaseDirectory + "coursedata.txt"; // Path of txt file
+
+            foreach (SNHUcourse course in courseList) {
+                linesOfData.Add(course.getFormattedCourseData());
+            }
+
+            File.WriteAllLines(filePath, linesOfData);
+        }
+
     }
 }
