@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 namespace CS114FinalProject
 {
     class LogicPR
-    {static public void PossibleSchedule()
+    {
+        static public void PossibleSchedule()
         {
             int schedulesize = 5; // can change to number of searches 
+            List<string> CurrentCourses;
             
 
             for(int i = 0; i < Logic.nummatches; i++)
@@ -24,8 +26,10 @@ namespace CS114FinalProject
                             {
                                 for (int a = 0; a < Logic.nummatches; a++)
                                 {
-                                    Console.WriteLine($"{a} {b} + {c} + {d} + {e}");
-                                    Console.WriteLine("test");
+                                    Console.WriteLine($"{a} + {b} + {c} + {d} + {e}");
+                                    
+                                    CurrentCourses = { c[Logic.matchrows[a],0].ToString()}
+
                                 }
                             }
                         }
