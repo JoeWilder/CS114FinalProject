@@ -90,7 +90,7 @@ namespace CS114FinalProject
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(634, 160);
+            this.label4.Location = new System.Drawing.Point(634, 151);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 17);
             this.label4.TabIndex = 10;
