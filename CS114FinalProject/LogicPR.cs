@@ -25,6 +25,7 @@ namespace CS114FinalProject
                                 for (int a = 0; a < Logic.nummatches; a++)
                                 {
                                     Console.WriteLine($"{a} {b} + {c} + {d} + {e}");
+                                    Console.WriteLine("test");
                                 }
                             }
                         }
