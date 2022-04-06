@@ -56,7 +56,7 @@ namespace CS114FinalProject
         private static List<string> search = new List<string> ();
 
 
-        private static int nummatches = 0;
+        public static int nummatches = 0;
         public static List<int> matchrows = new List<int>();
 
 
