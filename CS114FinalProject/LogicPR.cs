@@ -28,7 +28,7 @@ namespace CS114FinalProject
                                 {
                                     Console.WriteLine($"{a} + {b} + {c} + {d} + {e}");
                                     
-                                    CurrentCourses = { c[Logic.matchrows[a],0].ToString()}
+                                    //CurrentCourses = { c[Logic.matchrows[a],0].ToString()}
 
                                 }
                             }
