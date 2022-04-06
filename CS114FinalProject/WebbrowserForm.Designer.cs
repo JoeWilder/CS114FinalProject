@@ -1,7 +1,7 @@
 ﻿
 namespace CS114FinalProject
 {
-    partial class Form1
+    partial class WebbrowserForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,36 +29,34 @@ namespace CS114FinalProject
         /// </summary>
         private void InitializeComponent()
         {
-            this.classDataButton = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
-            // classDataButton
+            // webBrowser1
             // 
-            this.classDataButton.Location = new System.Drawing.Point(38, 429);
-            this.classDataButton.Name = "classDataButton";
-            this.classDataButton.Size = new System.Drawing.Size(188, 76);
-            this.classDataButton.TabIndex = 0;
-            this.classDataButton.Text = "Get Computer Science Class Data";
-            this.classDataButton.UseVisualStyleBackColor = true;
-            this.classDataButton.Click += new System.EventHandler(this.classDataButton_Click);
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(800, 450);
+            this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
-            // Form1
+            // WebbrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.classDataButton);
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.webBrowser1);
+            this.Name = "WebbrowserForm";
+            this.Text = "WebbrowserForm";
+            this.Load += new System.EventHandler(this.WebbrowserForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button classDataButton;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
-
