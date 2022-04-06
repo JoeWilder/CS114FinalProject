@@ -17,6 +17,9 @@ namespace CS114FinalProject
         public static DayOfWeek d = DayOfWeek.Monday;
         public static int t = 1230;
 
+        //List<CourseSection> sched = new List<CourseSection>();
+
+
         public static string[,] l = new string[2, 2] {
             { "x", "X"},
             { "X", "x" }
@@ -53,11 +56,11 @@ namespace CS114FinalProject
         private static List<string> search = new List<string> ();
 
         private static int nummatches = 0;
-        private static List<int> matchrows = new List<int>();
+        public static List<int> matchrows = new List<int>();
 
         // course catalog data
         private static string[] filedata;
-        private static string[,] c = new string[30, 10];
+        public static string[,] c = new string[30, 10];
 
         //sample/altered data for comparison//
 
