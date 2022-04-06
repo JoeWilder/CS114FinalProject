@@ -186,7 +186,7 @@ namespace CS114FinalProject
                         int sumcheck = 0;
 
                         /* (t) sets the time block of the current Constant coursesection (i) */
-                        for (t = 6; t < (6 + cXT); t++)  
+                        for (int t = 6; t < (6 + cXT); t++)  
                         {
                             Console.WriteLine($"Constants- Course section: {c[matchrows[i],0]} ,Current timeblock is i(t):" + c[matchrows[i], t]);
 
