@@ -19,13 +19,13 @@ namespace CS114FinalProject
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            Logic.formatData();  //run only after refreshing database/file/webscrape
+            //Logic.formatData();  //run only after refreshing database/file/webscrape
 
 
-            Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
-            Logic.initRelevantTable();  //creates linker table with only the searched-for courses
-            Logic.courseCompare();  //creates compatibility table comparing all sections of the searched-for courses
-            Logic.PrintCompatTable();
+            //Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
+            //Logic.initRelevantTable();  //creates linker table with only the searched-for courses
+            //Logic.courseCompare();  //creates compatibility table comparing all sections of the searched-for courses
+            //Logic.PrintCompatTable();
                 
         }
 
