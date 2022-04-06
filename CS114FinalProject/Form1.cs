@@ -18,7 +18,9 @@ namespace CS114FinalProject
         /* Listen for form load event */
         private void Form1_Load(object sender, EventArgs e)
         {
+
             Logic.formatData();  //run only after refreshing database/file/webscrape
+
 
             Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
             Logic.initRelevantTable();  //creates linker table with only the searched-for courses

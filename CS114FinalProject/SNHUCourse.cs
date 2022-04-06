@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*******************************************
+Program: SNHUCourse.cs
+Purpose: Encapsulate information and methods about a SNHU course
+Author: Joseph Wilder
+Date: April 4, 2022
+********************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +24,8 @@ namespace CS114FinalProject
         private string courseLocation;
         private string courseDate;
         private string courseMajor;
+        private bool currentlyOffered;
+        private string fileFormattedData; // Data to be stored in a file
 
 
         public SNHUcourse(string courseData)
@@ -24,6 +33,9 @@ namespace CS114FinalProject
             this.courseData = courseData;
             splitCourseData();
             parseCourseData();
+            courseName = stripNewlines(courseName);
+            currentlyOffered = correctSemester();
+            formatForFile();
             printCourseInformation();
         }
 
@@ -31,9 +43,7 @@ namespace CS114FinalProject
         /* Split raw data into something more readable */
         public void splitCourseData()
         {
-            //Console.WriteLine(courseData);
             splitData = courseData.Split('\n');
-
         }
 
 
@@ -91,6 +101,28 @@ namespace CS114FinalProject
         }
 
 
+        public bool correctSemester()
+        {
+            if (courseSemester == null) return false;
+            return (courseSemester.StartsWith("22/23 Fall"));
+        }
+
+
+        /* Strip string of newlines */
+        public string stripNewlines(string str)
+        {
+            if (str == null) return "";
+            return str.Trim();
+        }
+
+        /* Assigned formatted data to appropriate variable */
+        public void formatForFile()
+        {
+            fileFormattedData = courseName + " @ " + courseNum + " @ " + courseSemester + " @ " + courseProfessor +
+                " @ " + courseLocation + " @ " + courseDate + " @ " + courseMajor + " @ " + "Currently offered: " + currentlyOffered;
+        }
+
+
         /* Print all course information */
         public void printCourseInformation()
         {
@@ -101,6 +133,7 @@ namespace CS114FinalProject
             Console.WriteLine(courseLocation);
             Console.WriteLine(courseDate);
             Console.WriteLine(courseMajor);
+            Console.WriteLine("Currently offered: " + currentlyOffered);
         }
 
 
@@ -143,6 +176,12 @@ namespace CS114FinalProject
         public string getCourseMajor()
         {
             return courseMajor;
+        }
+
+
+        public string getFormattedCourseData()
+        {
+            return fileFormattedData;
         }
     }
 }
