@@ -13,19 +13,7 @@ namespace CS114FinalProject
 {
     public static class Logic
     {
-        // outdated
-        public static DayOfWeek d = DayOfWeek.Monday;
-        public static int t = 1230;
-
-        //List<CourseSection> sched = new List<CourseSection>();
-
-
-        public static string[,] l = new string[2, 2] {
-            { "x", "X"},
-            { "X", "x" }
-        };
-        //outdated ^^
-
+        
 
 
         //Logic Table - filled by comparison method (both one-time things)
@@ -53,16 +41,14 @@ namespace CS114FinalProject
        
 
         //user input (iterate thru 5-6 classes input) "CS-217" format
-        private static List<string> search = new List<string> ();
-
+        public static List<string> search = new List<string> ();
 
         public static int nummatches = 0;
         public static List<int> matchrows = new List<int>();
 
-
         // course catalog data
-        private static string[] filedata;
-        public static string[,] c = new string[30, 10];
+        public static string[] filedata;
+        public static string[,] c = new string[40, 10];
 
         //sample/altered data for comparison//
 
@@ -303,7 +289,8 @@ namespace CS114FinalProject
             //default directory is FinalProject/bin/debug, may change when project built??
             //File Format: Name@full-code-num@term@prof@Location@times@catergory@
 
-            filedata = File.ReadAllLines("SampleData.txt");  
+            //filedata = File.ReadAllLines("SampleData.txt");
+            filedata = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "coursedata.txt");
 
             foreach (string line in filedata)
             {
