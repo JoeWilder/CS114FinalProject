@@ -282,7 +282,7 @@ namespace CS114FinalProject
 
 
 
-        /*public static void formatData()
+        public static void formatData()
         {
             int eos; //index of current end of section
 
@@ -444,15 +444,19 @@ namespace CS114FinalProject
                     string starttime = times.Substring(0, eos);
                     string endtime = times.Remove(0, eos + 1);
 
+                    starttime = starttime.Trim(' ');
+                    endtime = endtime.Trim(' ');
+
                     DateTime startDT = DateTime.Parse(starttime);
                     DateTime endDT = DateTime.Parse(endtime);
 
                     int marker = 0;
                     marker = starttime.IndexOf((":"));
-                    if (marker == 1) {
-                        starttime = ('0' + starttime.Substring(marker - 1, 4));
-                    } else {
+                    if (marker == 2) {
                         starttime = starttime.Substring(marker - 2, 5);
+                    } else {
+                        starttime = ('0' + starttime.Substring(marker - 1, 4));
+                        
                     }
 
                     Console.WriteLine($"startime: _{starttime}_ and end: _{endtime}");
@@ -556,7 +560,7 @@ namespace CS114FinalProject
 
         }
 
-*/
+
 
     }
 }
