@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*******************************************
+Program: SNHUCourse.cs
+Purpose: Encapsulate information and methods about a SNHU course
+Author: Joseph Wilder
+Date: April 4, 2022
+********************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +16,7 @@ namespace CS114FinalProject
     class SNHUcourse
     {
         private string courseData; // Raw data about this course
-        string[] splitData; // Raw split data about this course
+        private string[] splitData; // Raw split data about this course
         private string courseName;
         private string courseNum;
         private string courseSemester;
@@ -17,6 +24,8 @@ namespace CS114FinalProject
         private string courseLocation;
         private string courseDate;
         private string courseMajor;
+        private bool currentlyOffered;
+        private string fileFormattedData; // Data to be stored in a file
 
 
         public SNHUcourse(string courseData)
@@ -24,23 +33,23 @@ namespace CS114FinalProject
             this.courseData = courseData;
             splitCourseData();
             parseCourseData();
-            printCourseInformation();
+            courseName = stripNewlines(courseName);
+            currentlyOffered = correctSemester();
+            formatForFile();
+            //printCourseInformation();
         }
 
 
         /* Split raw data into something more readable */
-        public void splitCourseData()
+        private void splitCourseData()
         {
-            //Console.WriteLine(courseData);
             splitData = courseData.Split('\n');
-
         }
 
 
         /* Read the split data and store it with the correct variable */
-        public void parseCourseData()
+        private void parseCourseData()
         {
-            //Console.WriteLine(splitData.Length);
             if (splitData.Length < 10)
             {
                 return;
@@ -91,6 +100,30 @@ namespace CS114FinalProject
         }
 
 
+        /* Check if course is being offered */
+        private bool correctSemester()
+        {
+            if (courseSemester == null) return false;
+            return (courseSemester.StartsWith("22/23 Fall"));
+        }
+
+
+        /* Strip string of newlines */
+        private string stripNewlines(string str)
+        {
+            if (str == null) return "";
+            return str.Trim();
+        }
+
+
+        /* Assigned formatted data to appropriate variable */
+        private void formatForFile()
+        {
+            fileFormattedData = courseName + " @ " + courseNum + " @ " + courseSemester + " @ " + courseProfessor +
+                " @ " + courseLocation + " @ " + courseDate + " @ " + courseMajor + " @ " + "Currently offered: " + currentlyOffered;
+        }
+
+
         /* Print all course information */
         public void printCourseInformation()
         {
@@ -101,6 +134,8 @@ namespace CS114FinalProject
             Console.WriteLine(courseLocation);
             Console.WriteLine(courseDate);
             Console.WriteLine(courseMajor);
+            Console.WriteLine("Currently offered: " + currentlyOffered);
+            Console.WriteLine("\n\n");
         }
 
 
@@ -143,6 +178,12 @@ namespace CS114FinalProject
         public string getCourseMajor()
         {
             return courseMajor;
+        }
+
+
+        public string getFormattedCourseData()
+        {
+            return fileFormattedData;
         }
     }
 }

@@ -54,22 +54,42 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
+
+    <Compile Include="creators.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="creators.Designer.cs">
+      <DependentUpon>creators.cs</DependentUpon>
+
     </Compile>
     <Compile Include="Logic.cs" />
+    <Compile Include="LogicPR.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule.cs" />
     <Compile Include="SNHUCourse.cs" />
+    <Compile Include="WebbrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WebbrowserForm.Designer.cs">
+      <DependentUpon>WebbrowserForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+
+    <EmbeddedResource Include="creators.resx">
+      <DependentUpon>creators.cs</DependentUpon>
+
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -79,7 +99,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="WebbrowserForm.resx">
+      <DependentUpon>WebbrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +116,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add a heading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add a subheading.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

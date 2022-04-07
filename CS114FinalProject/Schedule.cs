@@ -9,8 +9,19 @@ namespace CS114FinalProject
     public class Schedule
     {
 
-        List<CourseSection> sched = new List<CourseSection>();
+        private int ranking = 5;
+        public List<int> catalogrows;
 
+        public Schedule( List<int> c_rows, int rank)
+        {
+            catalogrows = c_rows;
+            ranking = rank;
+        }
 
+        /*public List<string> getCourses()
+        {
+            return ();
+        }
+        */
     }
 }
