@@ -310,6 +310,16 @@ namespace CS114FinalProject
                 eos = currentline.IndexOf("@"); //returns end of second section
                 c[l, 0] = currentline.Substring(0, eos); //Course number (CS-114-08608) saved
 
+                    //populating col 1,2,3 with parsed data from col 0
+                    string temp = c[l, 0];  //temp is CS-114-#####
+                    int dash = temp.IndexOf('-');
+                    c[l, 1] = c[l, 0].Substring(0, dash);
+                    temp = temp.Remove(0, dash + 1);  //temp now 114-#####
+                    dash = temp.IndexOf('-');
+                    c[l, 2] = temp.Substring(0, dash);
+                    temp = temp.Remove(0, dash + 1); //temp now just 5dig section#
+                    c[l, 3] = temp;
+
                 currentline = currentline.Remove(0, eos + 1); //remove up to (inlcuding) that @
                 eos = currentline.IndexOf("@"); //returns end of section 3 (term)
                 currentline = currentline.Remove(0, eos + 1);
@@ -320,15 +330,15 @@ namespace CS114FinalProject
 
                 eos = currentline.IndexOf("@"); //returns end of section 6  (TIMES)
 
-                currentline = currentline.Substring(0, eos); //cuts off end section, incl last @             
+                currentline = currentline.Substring(0, eos); //var = just day/time section of the data          
 
-                Console.WriteLine(currentline); //temp
+                Console.WriteLine(currentline); //todo
 
                 if (currentline == "" || currentline == " ")
                 {
                     break;
                 }
-                else if (currentline.Contains("Date TBD"))
+                else if ((currentline.Contains("Date TBD")) || (!currentline.Contains(":")) )
                 {
                     //Setting defaults
                     c[l, 5] = "2";
@@ -444,15 +454,20 @@ namespace CS114FinalProject
                     string starttime = times.Substring(0, eos);
                     string endtime = times.Remove(0, eos + 1);
 
+                    starttime = starttime.Trim(' ');
+                    endtime = endtime.Trim(' ');
+
+
                     DateTime startDT = DateTime.Parse(starttime);
                     DateTime endDT = DateTime.Parse(endtime);
 
                     int marker = 0;
                     marker = starttime.IndexOf((":"));
-                    if (marker == 1) {
-                        starttime = ('0' + starttime.Substring(marker - 1, 4));
-                    } else {
+                    if (marker == 2) {
                         starttime = starttime.Substring(marker - 2, 5);
+                    } else {
+                        starttime = ('0' + starttime.Substring(marker - 1, 4));
+                        
                     }
 
                     Console.WriteLine($"startime: _{starttime}_ and end: _{endtime}");
