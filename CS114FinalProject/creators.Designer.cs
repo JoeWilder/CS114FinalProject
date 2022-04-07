@@ -50,6 +50,7 @@ namespace CS114FinalProject
             this.label1.TabIndex = 0;
             this.label1.Text = "Creators ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -61,8 +62,9 @@ namespace CS114FinalProject
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(171, 92);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Joe Wilder \r\nJade Kosa \r\nPaige Robinson\r\nNick Towers ";
+            this.label2.Text = "Joe Wilder \r\nJade Kosa \r\nPaige Robinson\r\nNick Tower";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -74,6 +76,7 @@ namespace CS114FinalProject
             this.label3.Size = new System.Drawing.Size(165, 17);
             this.label3.TabIndex = 2;
             this.label3.Text = "Final Project CS 114";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // pictureBox2
             // 
@@ -84,6 +87,7 @@ namespace CS114FinalProject
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
@@ -94,6 +98,7 @@ namespace CS114FinalProject
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // creators
             // 

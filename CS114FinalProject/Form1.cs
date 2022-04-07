@@ -20,7 +20,7 @@ namespace CS114FinalProject
        private void Form1_Load(object sender, EventArgs e)
         {
 
-           Logic.formatData();  //run only after refreshing database/file/webscrape
+          // Logic.formatData();  //run only after refreshing database/file/webscrape
 
 
             Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
@@ -38,7 +38,7 @@ namespace CS114FinalProject
             webForm.ShowDialog();
 
 
-            Logic.formatData();  //run only after refreshing database/file/webscrape
+           // Logic.formatData();  //run only after refreshing database/file/webscrape
 
         }
 
@@ -56,7 +56,40 @@ namespace CS114FinalProject
            
         }
 
-        
+        private void menuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            subject settingsForm = new subject(); //create pop up
+            settingsForm.Show();
+        }
 
+        private void refreshCourseDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
