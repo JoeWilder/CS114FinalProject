@@ -30,7 +30,6 @@ namespace CS114FinalProject
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.classDataButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshCourseDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,16 +47,6 @@ namespace CS114FinalProject
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // classDataButton
-            // 
-            this.classDataButton.Location = new System.Drawing.Point(949, 49);
-            this.classDataButton.Name = "classDataButton";
-            this.classDataButton.Size = new System.Drawing.Size(89, 33);
-            this.classDataButton.TabIndex = 0;
-            this.classDataButton.Text = "Get Computer Science Class Data";
-            this.classDataButton.UseVisualStyleBackColor = true;
-            this.classDataButton.Click += new System.EventHandler(this.classDataButton_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.White;
@@ -67,7 +56,7 @@ namespace CS114FinalProject
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1077, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1077, 30);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "How To";
             // 
@@ -79,7 +68,7 @@ namespace CS114FinalProject
             this.menuToolStripMenuItem.Font = new System.Drawing.Font("Lucida Sans Unicode", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(85, 22);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(85, 26);
             this.menuToolStripMenuItem.Text = "Options ";
             this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
             // 
@@ -104,7 +93,7 @@ namespace CS114FinalProject
             this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Lucida Sans Unicode", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(67, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -201,7 +190,6 @@ namespace CS114FinalProject
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.classDataButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -217,8 +205,6 @@ namespace CS114FinalProject
         }
 
         #endregion
-
-        private System.Windows.Forms.Button classDataButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
