@@ -56,7 +56,7 @@ namespace CS114FinalProject
         private static List<string> search = new List<string> ();
 
 
-        private static int nummatches = 0;
+        public static int nummatches = 0;
         public static List<int> matchrows = new List<int>();
 
 
@@ -296,7 +296,7 @@ namespace CS114FinalProject
 
 
 
-        public static void formatData()
+        /*public static void formatData()
         {
             int eos; //index of current end of section
 
@@ -489,8 +489,8 @@ namespace CS114FinalProject
                         starttime = starttime.Trim(' ');
 
 
-                        //*Save starttime 1 to Catalog here*/
-                        if (!twoday) //1 day dbl block
+                        //*Save starttime 1 to Catalog here
+                        if (!twoday) //1 day dbl block 
                         {
                             c[l, 6] = (days.Substring(0, 1) + "-" + starttime);
                         }
@@ -511,7 +511,7 @@ namespace CS114FinalProject
                             starttime = ('0' + starttime);
 
 
-                        //* Saving time block 2 to Catalog here */
+                        //* Saving time block 2 to Catalog here 
                         if (!twoday) //1 day dbl block
                         {
                             c[l, 7] = (days.Substring(0, 1) + "-" + starttime);
@@ -522,10 +522,10 @@ namespace CS114FinalProject
 
                         Console.WriteLine("starttime of second block: _" + starttime);
                     }
-                    c[l, 5] = xt.ToString();  //* saves XT in catalog */
+                    c[l, 5] = xt.ToString();  //* saves XT in catalog 
 
 
-                    //*Saving to Catalog */
+                    //*Saving to Catalog 
                     if(twoday && !doubleblock)  //xt=2
                     {
                         c[l, 6] = (days.Substring(0, 1) + "-" + starttime);
@@ -569,7 +569,7 @@ namespace CS114FinalProject
 
         }
 
-
+*/
 
     }
 }
