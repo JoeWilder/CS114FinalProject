@@ -32,6 +32,7 @@ namespace CS114FinalProject
 
 
             this.classDataButton = new System.Windows.Forms.Button();
+
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshCourseDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +49,7 @@ namespace CS114FinalProject
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 
+
             this.SuspendLayout();
             // 
             // classDataButton
@@ -61,6 +63,7 @@ namespace CS114FinalProject
             this.classDataButton.UseVisualStyleBackColor = true;
             this.classDataButton.Click += new System.EventHandler(this.classDataButton_Click);
             // 
+
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.White;
@@ -261,11 +264,13 @@ namespace CS114FinalProject
             this.ClassList.Size = new System.Drawing.Size(564, 196);
             this.ClassList.TabIndex = 13;
             this.ClassList.SelectedIndexChanged += new System.EventHandler(this.ClassList_SelectedIndexChanged);
-            // 
+
+          // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1077, 552);
@@ -275,7 +280,8 @@ namespace CS114FinalProject
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.classDataButton);
+
+          this.Controls.Add(this.classDataButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
 
@@ -295,6 +301,7 @@ namespace CS114FinalProject
 
 
         private System.Windows.Forms.Button classDataButton;
+
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
@@ -308,6 +315,7 @@ namespace CS114FinalProject
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.Label label4;
+
     }
 }
 
