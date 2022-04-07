@@ -160,11 +160,7 @@ namespace CS114FinalProject
 
             foreach (SNHUcourse course in courseList)
             {
-                if (course.getCurrentlyOffered())
-                {
-                    linesOfData.Add(course.getFormattedCourseData());
-                }
-
+                linesOfData.Add(course.getFormattedCourseData());
             }
             File.WriteAllLines(filePath, linesOfData);
         }
