@@ -16,5 +16,11 @@ namespace CS114FinalProject
         {
             InitializeComponent();
         }
+
+        private void Timetable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Timetable.Text = "";
+
+        }
     }
 }

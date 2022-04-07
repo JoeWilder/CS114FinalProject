@@ -114,5 +114,15 @@ namespace CS114FinalProject
             }
             webBrowser1.Dispose();
         }
+
+        private void ClassList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Submition_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
