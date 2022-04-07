@@ -39,10 +39,16 @@ namespace CS114FinalProject
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)  //button for testing only
         {
             //Logic.c[Logic.matchrows[a],0]
-            Logic.formatData();  
+            Logic.formatData();
+        }
+
+        private void button2_Click(object sender, EventArgs e)  //button for testing only
+        {
+            LogicPR.PossibleSchedule();
+
         }
     }
 }

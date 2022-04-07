@@ -89,9 +89,10 @@ namespace CS114FinalProject
                 Console.WriteLine(course);
                 if(course != null)
                 {
-
-                    course = course.Remove(course.LastIndexOf("-"));
+                    int dsh = course.LastIndexOf("-");
+                    course = course.Substring(0, dsh);
                     Console.WriteLine(course);
+
                     bool found = false;  //to prevent duplicate entries
 
 
