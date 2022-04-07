@@ -12,6 +12,9 @@ namespace CS114FinalProject
 {
     public partial class subject : Form
     {
+
+        WebbrowserForm webForm = new WebbrowserForm();
+
         public subject()
         {
             InitializeComponent();
@@ -24,7 +27,21 @@ namespace CS114FinalProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
+
+            if (comboBox1.Text == "")
+            {
+                MessageBox.Show("Please select a subject");
+                return;
+            }
+
+            webForm.setCourseSearchName(comboBox1.Text);
+            webForm.Show();
+
+            if (webForm.getPageNumber() == 7)
+            {
+                webForm.findMajorGivenString(webForm.getCourseSearchName());
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)

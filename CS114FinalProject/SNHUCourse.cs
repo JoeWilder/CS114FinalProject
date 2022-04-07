@@ -185,5 +185,11 @@ namespace CS114FinalProject
         {
             return fileFormattedData;
         }
+
+
+        public bool isCurrentlyOffered()
+        {
+            return currentlyOffered;
+        }
     }
 }
