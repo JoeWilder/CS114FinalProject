@@ -120,7 +120,7 @@ namespace CS114FinalProject
         private void formatForFile()
         {
             fileFormattedData = courseName + " @ " + courseNum + " @ " + courseSemester + " @ " + courseProfessor +
-                " @ " + courseLocation + " @ " + courseDate + " @ " + courseMajor + " @ " + "Currently offered: " + currentlyOffered;
+                " @ " + courseLocation + " @ " + courseDate + " @ " + courseMajor + " @ ";
         }
 
 
@@ -184,6 +184,12 @@ namespace CS114FinalProject
         public string getFormattedCourseData()
         {
             return fileFormattedData;
+        }
+
+
+        public bool isCurrentlyOffered()
+        {
+            return currentlyOffered;
         }
     }
 }
