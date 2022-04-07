@@ -18,8 +18,8 @@ namespace CS114FinalProject
 
         /* Listen for form load event */
        private void Form1_Load(object sender, EventArgs e)
-        {
-
+       {
+            Logic.formatData();  //run only after refreshing database/file/webscrape
 
 
             Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
@@ -27,7 +27,7 @@ namespace CS114FinalProject
             Logic.courseCompare();  //creates compatibility table comparing all sections of the searched-for courses
             Logic.PrintCompatTable();
                 
-        }
+       }
 
 
         /* Start new web browser window */
@@ -37,7 +37,7 @@ namespace CS114FinalProject
             //webForm.ShowDialog();
 
 
-           // Logic.formatData();  //run only after refreshing database/file/webscrape
+            Logic.formatData();  //run only after refreshing database/file/webscrape
 
         }
 

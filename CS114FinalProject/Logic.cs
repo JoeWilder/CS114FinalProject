@@ -83,14 +83,15 @@ namespace CS114FinalProject
             nummatches = 0; 
             matchrows = new List<int>();
 
-            for (int i = 1; i < c.GetUpperBound(0); i++)  
+            for (int i = 1; i < c.GetUpperBound(0); i++)  //upperbound gets catalog height (?)
             {
                 string course = c[i, 0];  
                 Console.WriteLine(course);
                 if(course != null)
                 {
 
-                    course = course.Remove(course.LastIndexOf("-"));
+                    course = course.Remove(course.LastIndexOf("-"));  //removes everything after last -
+                    course = course.Trim(' ');
                     Console.WriteLine(course);
                     bool found = false;  //to prevent duplicate entries
 
@@ -336,7 +337,7 @@ namespace CS114FinalProject
 
 
     
-                     if ((currentline.Contains("Date TBD")) || (!currentline.Contains(":")))
+                     if ((currentline.Contains("Date TBD")) || (!currentline.Contains(":")))  //
                      {
                          //Setting defaults
                         c[l, 5] = "2";
