@@ -29,10 +29,7 @@ namespace CS114FinalProject
         /// </summary>
         private void InitializeComponent()
         {
-
-
             this.classDataButton = new System.Windows.Forms.Button();
-
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshCourseDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,13 +45,10 @@ namespace CS114FinalProject
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-
-
             this.SuspendLayout();
             // 
             // classDataButton
             // 
-
             this.classDataButton.Location = new System.Drawing.Point(949, 49);
             this.classDataButton.Name = "classDataButton";
             this.classDataButton.Size = new System.Drawing.Size(89, 33);
@@ -63,7 +57,6 @@ namespace CS114FinalProject
             this.classDataButton.UseVisualStyleBackColor = true;
             this.classDataButton.Click += new System.EventHandler(this.classDataButton_Click);
             // 
-
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.White;
@@ -189,89 +182,11 @@ namespace CS114FinalProject
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-
             // 
-            // Submition
-            // 
-            this.Submition.Location = new System.Drawing.Point(47, 289);
-            this.Submition.Name = "Submition";
-            this.Submition.Size = new System.Drawing.Size(129, 52);
-            this.Submition.TabIndex = 1;
-            this.Submition.Text = "Submit";
-            this.Submition.UseVisualStyleBackColor = true;
-            this.Submition.Click += new System.EventHandler(this.Submition_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(386, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Select your 5 classes for this semester related to your major";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(634, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 17);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Class 1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(634, 112);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 17);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Class 2";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(634, 151);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 17);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Class 3";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(634, 198);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 17);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Class 4";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(634, 242);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(54, 17);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Class 5";
-            // 
-            // ClassList
-            // 
-            this.ClassList.FormattingEnabled = true;
-            this.ClassList.ItemHeight = 16;
-            this.ClassList.Location = new System.Drawing.Point(47, 64);
-            this.ClassList.Name = "ClassList";
-            this.ClassList.Size = new System.Drawing.Size(564, 196);
-            this.ClassList.TabIndex = 13;
-            this.ClassList.SelectedIndexChanged += new System.EventHandler(this.ClassList_SelectedIndexChanged);
-
-          // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
-
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1077, 552);
             this.Controls.Add(this.label4);
@@ -280,11 +195,9 @@ namespace CS114FinalProject
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-
-          this.Controls.Add(this.classDataButton);
+            this.Controls.Add(this.classDataButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -299,9 +212,7 @@ namespace CS114FinalProject
 
         #endregion
 
-
         private System.Windows.Forms.Button classDataButton;
-
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
@@ -315,7 +226,6 @@ namespace CS114FinalProject
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.Label label4;
-
     }
 }
 
