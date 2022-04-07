@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace CS114FinalProject
 {
     public partial class Form1 : Form
@@ -16,10 +17,11 @@ namespace CS114FinalProject
 
 
         /* Listen for form load event */
-        private void Form1_Load(object sender, EventArgs e)
+       private void Form1_Load(object sender, EventArgs e)
         {
 
-            //Logic.formatData();  //run only after refreshing database/file/webscrape
+            Logic.formatData();  //run only after refreshing database/file/webscrape
+
 
             Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
             Logic.initRelevantTable();  //creates linker table with only the searched-for courses
@@ -30,7 +32,7 @@ namespace CS114FinalProject
 
 
         /* Start new web browser window */
-        private void classDataButton_Click(object sender, EventArgs e)
+       private void classDataButton_Click(object sender, EventArgs e)
         {
             WebbrowserForm webForm = new WebbrowserForm();
             webForm.ShowDialog();
@@ -49,6 +51,20 @@ namespace CS114FinalProject
         {
             LogicPR.PossibleSchedule();
 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void creditsToolStripMenuItem_Click(object sender, EventArgs e) //PR
+        {
+           
+            creators settingsForm = new creators(); //create pop up
+            settingsForm.Show();
+
+           
         }
     }
 }
