@@ -22,21 +22,21 @@ namespace CS114FinalProject
 {
     public partial class WebbrowserForm : Form
     {
-        string courseData; // Raw data about a course
-        List<SNHUcourse> courseList = new List<SNHUcourse>(); // List of SNHU courses
-        int pageNumber = 0; // What page of the SNHU website we are on
-        string htmltags = "";
-        List<string> listOfMajors = new List<string>();
+        private string courseSearchName = "";
+        private string courseData; // Raw data about a course
+        private List<SNHUcourse> courseList = new List<SNHUcourse>(); // List of SNHU courses
+        private int pageNumber = 0;
+        private List<string> listOfMajors = new List<string>();
 
 
+        /* Create the form */
         public WebbrowserForm()
         {
             InitializeComponent();
-
-
         }
 
 
+        /* Start navigating to the course offerings page on SNHU website */
         private void WebbrowserForm_Load(object sender, EventArgs e)
         {
             mySNHULogin();
@@ -44,6 +44,7 @@ namespace CS114FinalProject
         }
 
 
+        /* Keep checking where we are on the SNHU website */
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             pageNumber++;
@@ -54,7 +55,7 @@ namespace CS114FinalProject
 
             else if (pageNumber == 7)
             {
-                navigateToCompSciMajor();
+                findMajorGivenString(courseSearchName);
             }
         }
 
@@ -62,6 +63,7 @@ namespace CS114FinalProject
         /* Navigate to mysnhu website and attempt to login using the given credentials */
         private void mySNHULogin()
         {
+            webBrowser1.Show();
             webBrowser1.Navigate("https://my.snhu.edu/");
             while (webBrowser1.ReadyState != WebBrowserReadyState.Complete)
             {
@@ -86,21 +88,11 @@ namespace CS114FinalProject
         private void navigateToCourses()
         {
             webBrowser1.Navigate("https://my.snhu.edu/coursecatalog/Lists/Sections/SectionsBySubject.aspx?View={215C6024-AB45-46EF-B9CC-ADF871654DC5}&FilterField1=SectionLocation&FilterValue1=Manchester%20New%20Hampshire");
-
-        }
-
-
-        /* Show all computer science classes */
-        private void navigateToCompSciMajor()
-        {
-            findMajorGivenString("Computer Science");
-            webBrowser1.Document.GetElementById("img_1-15_").InvokeMember("click");
-            waitForCoursesToLoad();
         }
 
 
         /* Validate the input of a major */
-        private void findMajorGivenString(String majorName)
+        public void findMajorGivenString(String majorNameInput)
         {
             foreach (HtmlElement tag in webBrowser1.Document.GetElementsByTagName("tbody"))
             {
@@ -108,24 +100,42 @@ namespace CS114FinalProject
                 if (tag.Id == null) continue;
                 if (tag.Id.StartsWith("titl"))
                 {
-                    string s = Regex.Replace(tag.GetAttribute("groupstring"), @"[\d%-]", string.Empty);
-                    s = s.TrimStart('b');
-                    s = s.TrimEnd('b');
-                    //Console.WriteLine(s);
-                    if (majorName.Replace(" ", string.Empty).ToLower().Equals(s.ToLower()))
+                    string id = "";
+                    foreach (char c in tag.Id)
                     {
-                        Console.WriteLine("true");
+                        if (Char.IsDigit(c))
+                        {
+                            id = id + c;
+                        }
+                    }
+                    id = id.Insert(1, "-");
+                    id = id + "__";
+                    id = id.Insert(0, "tbod");
+                    string majorString = Regex.Replace(tag.GetAttribute("groupstring"), @"[\d%-]", string.Empty);
+                    majorString = majorString.TrimStart('b');
+                    majorString = majorString.TrimEnd('b');
+
+                    if (majorNameInput.Replace(" ", string.Empty).ToLower().Equals(majorString.ToLower()))
+                    {
+                        foreach (HtmlElement childTag in tag.Children)
+                        {
+                            childTag.GetElementsByTagName("img")[1].InvokeMember("click");
+                            waitForCoursesToLoad(id);
+                            return;
+                        }
                     }
                 }
             }
+            MessageBox.Show("Could not find the given major: " + courseSearchName);
+            Hide();
         }
 
 
         /* Wait until classes are loaded, then save the data */
-        private async void waitForCoursesToLoad()
+        private async void waitForCoursesToLoad(string paramTag)
         {
             await Task.Delay(3000);
-            foreach (HtmlElement tag in webBrowser1.Document.GetElementById("tbod1-15__").Children)
+            foreach (HtmlElement tag in webBrowser1.Document.GetElementById(paramTag).Children)
             {
                 if (tag.CanHaveChildren)
                 {
@@ -145,24 +155,96 @@ namespace CS114FinalProject
 
                 courseData = "";
             }
-            webBrowser1.Dispose();
-            Close();
-            saveDataToFile();
+            Hide();
+            saveCourseDataToFile();
         }
 
 
         /* Overwrite data to coursedata.txt */
-        public void saveDataToFile()
+        public void saveCourseDataToFile()
         {
-            Console.WriteLine("Saving data to text file");
             List<string> linesOfData = new List<string>(); // List of all lines
             String filePath = AppDomain.CurrentDomain.BaseDirectory + "coursedata.txt"; // Path of txt file
 
             foreach (SNHUcourse course in courseList)
             {
+                if (!course.isCurrentlyOffered()) continue;
                 linesOfData.Add(course.getFormattedCourseData());
             }
             File.WriteAllLines(filePath, linesOfData);
         }
+
+
+
+        /* Overwrite data to SNHUmajors.txt */
+        public void saveMajorDataToFile()
+        {
+            List<string> linesOfData = new List<string>(); // List of all lines
+            String filePath = AppDomain.CurrentDomain.BaseDirectory + "SNHUmajors.txt"; // Path of txt file
+
+            foreach (string major in listOfMajors)
+            {
+                linesOfData.Add(major);
+            }
+            File.WriteAllLines(filePath, linesOfData);
+        }
+
+
+        /* Get all majors and put them in a list */
+        public void populateListOfMajors()
+        {
+            foreach (HtmlElement tag in webBrowser1.Document.GetElementsByTagName("tbody"))
+            {
+                if (tag == null) continue;
+                if (tag.Id == null) continue;
+                if (tag.Id.StartsWith("titl"))
+                {
+                    string id = "";
+                    foreach (char c in tag.Id)
+                    {
+                        if (Char.IsDigit(c))
+                        {
+                            id = id + c;
+                        }
+                    }
+                    id = id.Insert(1, "-");
+                    id = id + "__";
+                    id = id.Insert(0, "tbod");
+                    string majorString = Regex.Replace(tag.GetAttribute("groupstring"), @"[\d%-]", string.Empty);
+                    majorString = majorString.TrimStart('b');
+                    majorString = majorString.TrimEnd('b');
+                    listOfMajors.Add(majorString);
+                }
+            }
+        }
+
+
+        /* Print all majors */
+        public void printAllMajors()
+        {
+            foreach (string major in listOfMajors)
+            {
+                Console.WriteLine(major);
+            }
+        }
+
+
+        public void setCourseSearchName(string courseName)
+        {
+            courseSearchName = courseName;
+        }
+
+
+        public string getCourseSearchName()
+        {
+            return courseSearchName;
+        }
+
+
+        public int getPageNumber()
+        {
+            return pageNumber;
+        }
+
     }
 }
