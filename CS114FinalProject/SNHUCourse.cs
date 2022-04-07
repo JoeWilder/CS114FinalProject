@@ -27,7 +27,6 @@ namespace CS114FinalProject
         private bool currentlyOffered;
         private string fileFormattedData; // Data to be stored in a file
 
-
         public SNHUcourse(string courseData)
         {
             this.courseData = courseData;
@@ -120,7 +119,7 @@ namespace CS114FinalProject
         private void formatForFile()
         {
             fileFormattedData = courseName + " @ " + courseNum + " @ " + courseSemester + " @ " + courseProfessor +
-                " @ " + courseLocation + " @ " + courseDate + " @ " + courseMajor + " @ " + "Currently offered: " + currentlyOffered;
+                " @ " + courseLocation + " @ " + courseDate + " @ " + courseMajor + " @";
         }
 
 
@@ -184,6 +183,13 @@ namespace CS114FinalProject
         public string getFormattedCourseData()
         {
             return fileFormattedData;
+        }
+
+
+
+        public bool getCurrentlyOffered()
+        {
+            return currentlyOffered;
         }
     }
 }
