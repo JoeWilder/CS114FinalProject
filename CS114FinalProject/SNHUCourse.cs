@@ -16,7 +16,7 @@ namespace CS114FinalProject
     class SNHUcourse
     {
         private string courseData; // Raw data about this course
-        string[] splitData; // Raw split data about this course
+        private string[] splitData; // Raw split data about this course
         private string courseName;
         private string courseNum;
         private string courseSemester;
@@ -36,21 +36,20 @@ namespace CS114FinalProject
             courseName = stripNewlines(courseName);
             currentlyOffered = correctSemester();
             formatForFile();
-            printCourseInformation();
+            //printCourseInformation();
         }
 
 
         /* Split raw data into something more readable */
-        public void splitCourseData()
+        private void splitCourseData()
         {
             splitData = courseData.Split('\n');
         }
 
 
         /* Read the split data and store it with the correct variable */
-        public void parseCourseData()
+        private void parseCourseData()
         {
-            //Console.WriteLine(splitData.Length);
             if (splitData.Length < 10)
             {
                 return;
@@ -101,7 +100,8 @@ namespace CS114FinalProject
         }
 
 
-        public bool correctSemester()
+        /* Check if course is being offered */
+        private bool correctSemester()
         {
             if (courseSemester == null) return false;
             return (courseSemester.StartsWith("22/23 Fall"));
@@ -109,14 +109,15 @@ namespace CS114FinalProject
 
 
         /* Strip string of newlines */
-        public string stripNewlines(string str)
+        private string stripNewlines(string str)
         {
             if (str == null) return "";
             return str.Trim();
         }
 
+
         /* Assigned formatted data to appropriate variable */
-        public void formatForFile()
+        private void formatForFile()
         {
             fileFormattedData = courseName + " @ " + courseNum + " @ " + courseSemester + " @ " + courseProfessor +
                 " @ " + courseLocation + " @ " + courseDate + " @ " + courseMajor + " @ " + "Currently offered: " + currentlyOffered;
@@ -134,6 +135,7 @@ namespace CS114FinalProject
             Console.WriteLine(courseDate);
             Console.WriteLine(courseMajor);
             Console.WriteLine("Currently offered: " + currentlyOffered);
+            Console.WriteLine("\n\n");
         }
 
 

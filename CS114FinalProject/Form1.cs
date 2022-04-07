@@ -20,7 +20,7 @@ namespace CS114FinalProject
        private void Form1_Load(object sender, EventArgs e)
         {
 
-           // Logic.formatData();  //run only after refreshing database/file/webscrape
+           Logic.formatData();  //run only after refreshing database/file/webscrape
 
 
             Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
@@ -36,6 +36,10 @@ namespace CS114FinalProject
         {
             WebbrowserForm webForm = new WebbrowserForm();
             webForm.ShowDialog();
+
+
+            Logic.formatData();  //run only after refreshing database/file/webscrape
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

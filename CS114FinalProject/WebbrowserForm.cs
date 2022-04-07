@@ -12,22 +12,28 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace CS114FinalProject
 {
     public partial class WebbrowserForm : Form
     {
-
         string courseData; // Raw data about a course
         List<SNHUcourse> courseList = new List<SNHUcourse>(); // List of SNHU courses
         int pageNumber = 0; // What page of the SNHU website we are on
+        string htmltags = "";
+        List<string> listOfMajors = new List<string>();
+
 
         public WebbrowserForm()
         {
             InitializeComponent();
+
+
         }
 
 
@@ -52,6 +58,7 @@ namespace CS114FinalProject
             }
         }
 
+
         /* Navigate to mysnhu website and attempt to login using the given credentials */
         private void mySNHULogin()
         {
@@ -72,7 +79,6 @@ namespace CS114FinalProject
                     tag.InvokeMember("click");
                 }
             }
-
         }
 
 
@@ -80,14 +86,38 @@ namespace CS114FinalProject
         private void navigateToCourses()
         {
             webBrowser1.Navigate("https://my.snhu.edu/coursecatalog/Lists/Sections/SectionsBySubject.aspx?View={215C6024-AB45-46EF-B9CC-ADF871654DC5}&FilterField1=SectionLocation&FilterValue1=Manchester%20New%20Hampshire");
+
         }
 
 
         /* Show all computer science classes */
         private void navigateToCompSciMajor()
         {
+            findMajorGivenString("Computer Science");
             webBrowser1.Document.GetElementById("img_1-15_").InvokeMember("click");
             waitForCoursesToLoad();
+        }
+
+
+        /* Validate the input of a major */
+        private void findMajorGivenString(String majorName)
+        {
+            foreach (HtmlElement tag in webBrowser1.Document.GetElementsByTagName("tbody"))
+            {
+                if (tag == null) continue;
+                if (tag.Id == null) continue;
+                if (tag.Id.StartsWith("titl"))
+                {
+                    string s = Regex.Replace(tag.GetAttribute("groupstring"), @"[\d%-]", string.Empty);
+                    s = s.TrimStart('b');
+                    s = s.TrimEnd('b');
+                    //Console.WriteLine(s);
+                    if (majorName.Replace(" ", string.Empty).ToLower().Equals(s.ToLower()))
+                    {
+                        Console.WriteLine("true");
+                    }
+                }
+            }
         }
 
 
@@ -114,7 +144,6 @@ namespace CS114FinalProject
                 }
 
                 courseData = "";
-                Console.WriteLine("\n\n\n");
             }
             webBrowser1.Dispose();
             Close();
@@ -129,12 +158,11 @@ namespace CS114FinalProject
             List<string> linesOfData = new List<string>(); // List of all lines
             String filePath = AppDomain.CurrentDomain.BaseDirectory + "coursedata.txt"; // Path of txt file
 
-            foreach (SNHUcourse course in courseList) {
+            foreach (SNHUcourse course in courseList)
+            {
                 linesOfData.Add(course.getFormattedCourseData());
             }
-
             File.WriteAllLines(filePath, linesOfData);
         }
-
     }
 }
