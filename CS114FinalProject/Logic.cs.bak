@@ -89,8 +89,8 @@ namespace CS114FinalProject
                 Console.WriteLine(course);
                 if(course != null)
                 {
-
-                    course = course.Remove(course.LastIndexOf("-"));
+					int dsh = course.LastIndexOf('-');
+					course = course.Substring(0,dsh);
                     Console.WriteLine(course);
                     bool found = false;  //to prevent duplicate entries
 
@@ -301,256 +301,257 @@ namespace CS114FinalProject
             {
                 string currentline = filedata[l];
 
+                eos = currentline.IndexOf("(");
+                c[l, 4] = currentline.Substring(0, eos );  //Name of Course saved
+
+                eos = currentline.IndexOf("@"); //returns 1st occurance (@ after full name)
+                currentline = currentline.Remove(0, (eos+1));  
+
+                eos = currentline.IndexOf("@"); //returns end of second section
+                c[l, 0] = currentline.Substring(0, eos); //Course number (CS-114-08608) saved
+
+                    //populating col 1,2,3 with parsed data from col 0
+                    string temp = c[l, 0];  //temp is CS-114-#####
+                    int dash = temp.IndexOf('-');
+                    c[l, 1] = c[l, 0].Substring(0, dash);
+                    temp = temp.Remove(0, dash + 1);  //temp now 114-#####
+                    dash = temp.IndexOf('-');
+                    c[l, 2] = temp.Substring(0, dash);
+                    temp = temp.Remove(0, dash + 1); //temp now just 5dig section#
+                    c[l, 3] = temp;
+                    
+                currentline = currentline.Remove(0, eos + 1); //remove up to (inlcuding) that @
+                eos = currentline.IndexOf("@"); //returns end of section 3 (term)
+                currentline = currentline.Remove(0, eos + 1);
+                eos = currentline.IndexOf("@"); //returns end of section 4 (prof)
+                currentline = currentline.Remove(0, eos + 1);
+                eos = currentline.IndexOf("@"); //returns end of section 5 (location)
+                currentline = currentline.Remove(0, eos + 1);
+
+                eos = currentline.IndexOf("@"); //returns end of section 6  (TIMES)
+
+                currentline = currentline.Substring(0, eos); //var = just day/time section of the data             
+
+                Console.WriteLine(currentline); //temp
 
                 if (currentline == "" || currentline == " ")
                 {
                     break;
                 }
+ 				else if ((currentline.Contains("Date TBD")) || (!currentline.Contains(":")) )
+                {
+                    //Setting defaults
+                    c[l, 5] = "2";
+                    c[l, 6] = "TBD";
+                    c[l, 7] = "TBD";
+                    c[l, 8] = ".";
+                    c[l, 9] = ".";
+
+                }
                 else
                 {
+                    string first;
+                    string second;
 
-                
+                    string days;
+                    string times;
+                    char[] nums = new char[10] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 
-                    eos = currentline.IndexOf("(");
-                    c[l, 4] = currentline.Substring(0, eos );  //Name of Course saved
+                    int xt = 0;
+                    bool twoday = false;
+                    bool doubleblock = false;
+                    bool difflines = false;
 
-                    eos = currentline.IndexOf("@"); //returns 1st occurance (@ after full name)
-                    currentline = currentline.Remove(0, (eos+1));  
-    
-                    eos = currentline.IndexOf("@"); //returns end of second section
-                    c[l, 0] = currentline.Substring(0, eos); //Course number (CS-114-08608) saved
+                    //if before/after semicolon are same/contain each other, delete duplicate
 
-                    currentline = currentline.Remove(0, eos + 1); //remove up to (inlcuding) that @
-                    eos = currentline.IndexOf("@"); //returns end of section 3 (term)
-                    currentline = currentline.Remove(0, eos + 1);
-                    eos = currentline.IndexOf("@"); //returns end of section 4 (prof)
-                    currentline = currentline.Remove(0, eos + 1);
-                    eos = currentline.IndexOf("@"); //returns end of section 5 (location)
-                    currentline = currentline.Remove(0, eos + 1);
+                    if (currentline.Contains(";")) 
+                    {
+                        eos = currentline.IndexOf(";");
 
-                    eos = currentline.IndexOf("@"); //returns end of section 6  (TIMES)
-
-                    currentline = currentline.Substring(0, eos); //cuts off end section, incl last @             
-
-                    Console.WriteLine(currentline); //temp
+                        //storing the part before/after in identical formatting
+                        first = currentline.Substring(0, eos + 1);
+                        second = currentline.Substring(eos + 1, (currentline.Length - (eos + 1)));
+                        first = first.Trim(' ');
+                        second = second.Trim(' ');
+                        first = first.Trim(';');
+                        second = second.Trim(';');
 
 
-    
-                     if ((currentline.Contains("Date TBD")) || (!currentline.Contains(":")))
-                     {
-                         //Setting defaults
-                        c[l, 5] = "2";
-                        c[l, 6] = "TBD";
-                        c[l, 7] = "TBD";
-                        c[l, 8] = ".";
-                        c[l, 9] = ".";
+                        //determine when day letters end
 
-                     }
-                     else
-                     {
-                        string first;
-                        string second;
+                        eos = first.IndexOfAny(nums);  //days1/2 end at first number 
+                        string days1 = first.Substring(0, eos);
+                        first = first.Remove(0, eos);
 
-                        string days;
-                        string times;
-                        char[] nums = new char[10] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+                        int eos2 = second.IndexOfAny(nums);
+                        string days2 = second.Substring(0, eos);
+                        second = second.Remove(0, eos2);
 
-                        int xt = 0;
-                        bool twoday = false;
-                        bool doubleblock = false;
-                        bool difflines = false;
+                        days1 = days1.TrimStart(' ');
+                        days2 = days2.TrimStart(' ');
+                        first = first.Trim(' ');
+                        second = second.Trim(' ');
+                        //now first/second are times, days1/2 are days
 
-                        //if before/after semicolon are same/contain each other, delete duplicate
-
-                        if (currentline.Contains(";")) 
+                        //Console.WriteLine($"first: _{first}_ adn second: _{second}_");
+                        if (first.Contains(second) && days1.Contains(days2))
                         {
-                            eos = currentline.IndexOf(";");
-
-                            //storing the part before/after in identical formatting
-                            first = currentline.Substring(0, eos + 1);
-                            second = currentline.Substring(eos + 1, (currentline.Length - (eos + 1)));
-                            first = first.Trim(' ');
-                            second = second.Trim(' ');
-                            first = first.Trim(';');
-                            second = second.Trim(';');
-
-
-                            //determine when day letters end
-
-                            eos = first.IndexOfAny(nums);  //days1/2 end at first number 
-                            string days1 = first.Substring(0, eos);
-                            first = first.Remove(0, eos);
-
-                            int eos2 = second.IndexOfAny(nums);
-                            string days2 = second.Substring(0, eos);
-                            second = second.Remove(0, eos2);
-
-                            days1 = days1.TrimStart(' ');
-                            days2 = days2.TrimStart(' ');
-                            first = first.Trim(' ');
-                            second = second.Trim(' ');
-                            //now first/second are times, days1/2 are days
-
-                            //Console.WriteLine($"first: _{first}_ adn second: _{second}_");
-                            if (first.Contains(second) && days1.Contains(days2))
-                            {
-                                currentline = days1 + " " + first;
-                            } else { //if they dont match  //todo incomplete-add logic here if time/priority
-                                difflines = true; 
-                            }
-
-                            days = days1;
-                            times = first;
-
-                        } else  
-                        {
-                            //determine when day letters end
-
-                            eos = currentline.IndexOfAny(nums);  //returns index of first number 
-
-                            days = currentline.Substring(0, eos);
-                            times = currentline.Remove(0, eos);
-
-                            days = days.TrimStart(' ');  //leave trailing spaces for T 
-                            times = times.Trim(' ');
+                            currentline = days1 + " " + first;
+                        } else { //if they dont match  //todo incomplete-add logic here if time/priority
+                            difflines = true; 
                         }
 
-                        if (days.Contains("M"))
-                        {
-                            xt++;
-                        }
-                        if (days.Contains("W"))
-                        {
-                            xt++;
-                        }
-                        if (days.Contains("F"))
-                        {
-                            xt++;
-                        }
-                        if (days.Contains("TH"))
-                        {
-                            xt++;
-                            //re-writing TH into just H
-                            int thurs = days.IndexOf('H');
-                            days = days.Remove(thurs - 1, 1);
-                        }
-                        if (days.Contains("T "))  //T<SPACE> so TH (thursday) doesn't get grabbed here 
-                        {
-                            xt++;
-                        }
+                        days = days1;
+                        times = first;
 
-                        if (xt == 2) {
-                            twoday = true;
-                        }
+                    } else  
+                    {
+                        //determine when day letters end
 
-                        Console.WriteLine(days + "_" + times);//
+                        eos = currentline.IndexOfAny(nums);  //returns index of first number 
 
-                        //Determining how many blocks of time course meets for
+                        days = currentline.Substring(0, eos);
+                        times = currentline.Remove(0, eos);
 
-                        eos = times.IndexOf("-");
+                        days = days.TrimStart(' ');  //leave trailing spaces for T 
+                        times = times.Trim(' ');
+                    }
 
-                        string starttime = times.Substring(0, eos);
-                        string endtime = times.Remove(0, eos + 1);
+                    if (days.Contains("M"))
+                    {
+                        xt++;
+                    }
+                    if (days.Contains("W"))
+                    {
+                        xt++;
+                    }
+                    if (days.Contains("F"))
+                    {
+                        xt++;
+                    }
+                    if (days.Contains("TH"))
+                    {
+                        xt++;
+                        //re-writing TH into just H
+                        int thurs = days.IndexOf('H');
+                        days = days.Remove(thurs - 1, 1);
+                    }
+                    if (days.Contains("T "))  //T<SPACE> so TH (thursday) doesn't get grabbed here 
+                    {
+                        xt++;
+                    }
 
-                        starttime = starttime.Trim(' ');
-                        endtime = endtime.Trim(' ');
+                    if (xt == 2) {
+                        twoday = true;
+                    }
 
-                        DateTime startDT = DateTime.Parse(starttime);
-                        DateTime endDT = DateTime.Parse(endtime);
+                    Console.WriteLine(days + "_" + times);//
 
-                        int marker = 0;
-                        marker = starttime.IndexOf((":"));
-                        if (marker == 2) {
-                            starttime = starttime.Substring(marker - 2, 5);
-                        } else {
-                            starttime = ('0' + starttime.Substring(marker - 1, 4));
+                    //Determining how many blocks of time course meets for
+
+                    eos = times.IndexOf("-");
+
+                    string starttime = times.Substring(0, eos);
+                    string endtime = times.Remove(0, eos + 1);
+
+                    starttime = starttime.Trim(' ');
+                    endtime = endtime.Trim(' ');
+
+                    DateTime startDT = DateTime.Parse(starttime);
+                    DateTime endDT = DateTime.Parse(endtime);
+
+                    int marker = 0;
+                    marker = starttime.IndexOf((":"));
+                    if (marker == 2) {
+                        starttime = starttime.Substring(marker - 2, 5);
+                    } else {
+                        starttime = ('0' + starttime.Substring(marker - 1, 4));
                         
-                        }
+                    }
 
-                        Console.WriteLine($"startime: _{starttime}_ and end: _{endtime}");
-                        Console.WriteLine($"startDT: _{startDT}_ and endDT: _{endDT}");
+                    Console.WriteLine($"startime: _{starttime}_ and end: _{endtime}");
+                    Console.WriteLine($"startDT: _{startDT}_ and endDT: _{endDT}");
 
-                        TimeSpan span = endDT.Subtract(startDT);
+                    TimeSpan span = endDT.Subtract(startDT);
 
-                        ////IF TIMEBLOCK is longer than 1hr15min, class is double block
-                        if(span.TotalMinutes > 76)
+                    ////IF TIMEBLOCK is longer than 1hr15min, class is double block
+                    if(span.TotalMinutes > 76)
+                    {
+                        xt++;
+                        doubleblock = true;
+
+                        marker = starttime.IndexOf(":");
+                        if (marker == 2){
+                            starttime = ('0' +  starttime.Substring(marker-1, 4));  //"02:00" PM 
+                        } else
                         {
-                            xt++;
-                            doubleblock = true;
-
-                            marker = starttime.IndexOf(":");
-                            if (marker == 2){
-                                starttime = ('0' +  starttime.Substring(marker-1, 4));  //"02:00" PM 
-                            } else
-                            {
-                                starttime = starttime.Substring(marker - 2, 5);  //"11:00" AM  //m+3?
-                            }
-                            starttime = starttime.Trim(' ');
-
-
-                            //*Save starttime 1 to Catalog here
-                            if (!twoday) //1 day dbl block 
-                            {
-                                c[l, 6] = (days.Substring(0, 1) + "-" + starttime);
-                            }
-
-                            //starttime now holds second block:
-                            startDT = startDT.AddMinutes(90.0);
-                            starttime = startDT.ToString(); 
-
-                            //saving just the time "00:00"
-                            marker = starttime.IndexOf(":");
-                            marker -= 2;
-                            starttime = starttime.Substring(marker, 5);
-                            starttime = starttime.Trim(' ');
-
-                            //add leading 0 if 1 digit hour
-                            marker = starttime.IndexOf(":");
-                            if (marker == 1)
-                                starttime = ('0' + starttime);
-
-
-                            //* Saving time block 2 to Catalog here 
-                            if (!twoday) //1 day dbl block
-                            {
-                                c[l, 7] = (days.Substring(0, 1) + "-" + starttime);
-                                c[l,8]=".";
-                                c[l,9]=".";
-                            }
-
-
-                            Console.WriteLine("starttime of second block: _" + starttime);
+                            starttime = starttime.Substring(marker - 2, 5);  //"11:00" AM  //m+3?
                         }
-                        c[l, 5] = xt.ToString();  //* saves XT in catalog 
+                        starttime = starttime.Trim(' ');
 
 
-                        //*Saving to Catalog 
-                        if(twoday && !doubleblock)  //xt=2
+                        //*Save starttime 1 to Catalog here
+                        if (!twoday) //1 day dbl block 
                         {
                             c[l, 6] = (days.Substring(0, 1) + "-" + starttime);
-                            c[l, 7] = (days.Substring(2, 1) + "-" + starttime);
-                            c[l,8] = ".";
-                            c[l,9] = ".";
                         }
-                        else if( xt == 1 && !doubleblock) //1 day 1 block
-                        {
-                            c[l,6] = (days.Substring(0,1) + "-" + starttime);
-                            c[l, 7] = ".";
-                            c[l, 8] = ".";
-                            c[l, 9] = ".";
-                        } else if (xt ==3 && doubleblock && twoday) //2 days, 1 block 1 doubleblock
-                        {
 
-                        } else if(twoday && difflines){ //2 days, 1 block at different times
-                            //see semicolor elseif above
+                        //starttime now holds second block:
+                        startDT = startDT.AddMinutes(90.0);
+                        starttime = startDT.ToString(); 
+
+                        //saving just the time "00:00"
+                        marker = starttime.IndexOf(":");
+                        marker -= 2;
+                        starttime = starttime.Substring(marker, 5);
+                        starttime = starttime.Trim(' ');
+
+                        //add leading 0 if 1 digit hour
+                        marker = starttime.IndexOf(":");
+                        if (marker == 1)
+                            starttime = ('0' + starttime);
+
+
+                        //* Saving time block 2 to Catalog here 
+                        if (!twoday) //1 day dbl block
+                        {
+                            c[l, 7] = (days.Substring(0, 1) + "-" + starttime);
+                            c[l,8]=".";
+                            c[l,9]=".";
                         }
+
+
+                        Console.WriteLine("starttime of second block: _" + starttime);
+                    }
+                    c[l, 5] = xt.ToString();  //* saves XT in catalog 
+
+
+                    //*Saving to Catalog 
+                    if(twoday && !doubleblock)  //xt=2
+                    {
+                        c[l, 6] = (days.Substring(0, 1) + "-" + starttime);
+                        c[l, 7] = (days.Substring(2, 1) + "-" + starttime);
+                        c[l,8] = ".";
+                        c[l,9] = ".";
+                    }
+                    else if( xt == 1 && !doubleblock) //1 day 1 block
+                    {
+                        c[l,6] = (days.Substring(0,1) + "-" + starttime);
+                        c[l, 7] = ".";
+                        c[l, 8] = ".";
+                        c[l, 9] = ".";
+                    } else if (xt ==3 && doubleblock && twoday) //2 days, 1 block 1 doubleblock
+                    {
+
+                    } else if(twoday && difflines){ //2 days, 1 block at different times
+                        //see semicolor elseif above
+                    }
                     
 
 
 
 
-                     }//if not blank or tbd
-                }
+                }//if not blank or tbd
 
 
             } //end of l(ine) loop
