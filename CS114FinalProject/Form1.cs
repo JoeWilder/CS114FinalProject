@@ -33,8 +33,8 @@ namespace CS114FinalProject
         /* Start new web browser window */
        private void classDataButton_Click(object sender, EventArgs e)
         {
-            WebbrowserForm webForm = new WebbrowserForm();
-            webForm.ShowDialog();
+           // WebbrowserForm webForm = new WebbrowserForm();
+            //webForm.ShowDialog();
 
 
             Logic.formatData();  //run only after refreshing database/file/webscrape
