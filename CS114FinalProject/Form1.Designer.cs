@@ -66,7 +66,7 @@ namespace CS114FinalProject
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1077, 26);
+            this.menuStrip1.Size = new System.Drawing.Size(1077, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "How To";
             // 
@@ -78,8 +78,9 @@ namespace CS114FinalProject
             this.menuToolStripMenuItem.Font = new System.Drawing.Font("Lucida Sans Unicode", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(85, 22);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
             this.menuToolStripMenuItem.Text = "Options ";
+            this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
             // 
             // refreshCourseDataToolStripMenuItem
             // 
@@ -87,6 +88,7 @@ namespace CS114FinalProject
             this.refreshCourseDataToolStripMenuItem.Name = "refreshCourseDataToolStripMenuItem";
             this.refreshCourseDataToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
             this.refreshCourseDataToolStripMenuItem.Text = "Refresh Course Data";
+            this.refreshCourseDataToolStripMenuItem.Click += new System.EventHandler(this.refreshCourseDataToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -101,8 +103,9 @@ namespace CS114FinalProject
             this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Lucida Sans Unicode", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // creditsToolStripMenuItem
             // 
@@ -139,6 +142,7 @@ namespace CS114FinalProject
             this.label2.Text = "How To Use:\r\nInput Five classes of the same subject\r\ninto the text box. Put each " +
     "class on a \r\nseperate line. Example (CS-114). Then\r\nunder options select Refresh" +
     " Course Data.";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox1
             // 
@@ -149,6 +153,7 @@ namespace CS114FinalProject
             this.textBox1.Size = new System.Drawing.Size(395, 248);
             this.textBox1.TabIndex = 5;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label3
             // 
@@ -160,6 +165,7 @@ namespace CS114FinalProject
             this.label3.Size = new System.Drawing.Size(197, 21);
             this.label3.TabIndex = 6;
             this.label3.Text = "Input Classes Below ";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -171,6 +177,7 @@ namespace CS114FinalProject
             this.label4.Size = new System.Drawing.Size(276, 63);
             this.label4.TabIndex = 7;
             this.label4.Text = "Purpose:\r\nTo search classes and find \r\nthe perfect schedule for you!";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // pictureBox1
             // 
