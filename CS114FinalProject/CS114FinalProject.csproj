@@ -54,6 +54,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="creators.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="creators.Designer.cs">
+      <DependentUpon>creators.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logic.cs" />
     <Compile Include="LogicPR.cs" />
     <Compile Include="Program.cs" />
@@ -69,6 +75,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="creators.resx">
+      <DependentUpon>creators.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -77,6 +86,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="WebbrowserForm.resx">
       <DependentUpon>WebbrowserForm.cs</DependentUpon>
@@ -93,6 +103,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add a heading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add a subheading.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
