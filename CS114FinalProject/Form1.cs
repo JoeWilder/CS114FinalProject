@@ -94,7 +94,7 @@ namespace CS114FinalProject
         private void btn_schedule_Click(object sender, EventArgs e)
         {
 
-            Logic.setSearch(textBox1.Text);
+            //Logic.setSearch(textBox1.Text);
         }
     }
 }
