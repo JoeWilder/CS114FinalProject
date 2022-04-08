@@ -43,6 +43,7 @@ namespace CS114FinalProject
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_schedule = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +57,7 @@ namespace CS114FinalProject
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1077, 26);
+            this.menuStrip1.Size = new System.Drawing.Size(1077, 30);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "How To";
             // 
@@ -68,7 +69,7 @@ namespace CS114FinalProject
             this.menuToolStripMenuItem.Font = new System.Drawing.Font("Lucida Sans Unicode", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(85, 22);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(85, 26);
             this.menuToolStripMenuItem.Text = "Options ";
             this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
             // 
@@ -93,7 +94,7 @@ namespace CS114FinalProject
             this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Lucida Sans Unicode", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(67, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -135,10 +136,10 @@ namespace CS114FinalProject
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(546, 147);
+            this.textBox1.Location = new System.Drawing.Point(597, 147);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(395, 248);
+            this.textBox1.Size = new System.Drawing.Size(311, 248);
             this.textBox1.TabIndex = 5;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -178,12 +179,25 @@ namespace CS114FinalProject
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // btn_schedule
+            // 
+            this.btn_schedule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_schedule.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_schedule.Location = new System.Drawing.Point(670, 417);
+            this.btn_schedule.Name = "btn_schedule";
+            this.btn_schedule.Size = new System.Drawing.Size(170, 54);
+            this.btn_schedule.TabIndex = 8;
+            this.btn_schedule.Text = "Find Schedules";
+            this.btn_schedule.UseVisualStyleBackColor = true;
+            this.btn_schedule.Click += new System.EventHandler(this.btn_schedule_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1077, 552);
+            this.Controls.Add(this.btn_schedule);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
@@ -218,6 +232,7 @@ namespace CS114FinalProject
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btn_schedule;
     }
 }
 

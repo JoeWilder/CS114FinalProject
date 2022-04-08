@@ -22,7 +22,7 @@ namespace CS114FinalProject
             Logic.formatData();  //run only after refreshing database/file/webscrape
 
 
-            Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
+            Logic.setSearch("CS-203", "CS-219", "CS-114","CS-114L", "CS-217");
             Logic.initRelevantTable();  //creates linker table with only the searched-for courses
             Logic.courseCompare();  //creates compatibility table comparing all sections of the searched-for courses
             Logic.PrintCompatTable();
@@ -78,7 +78,7 @@ namespace CS114FinalProject
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            //
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -89,6 +89,12 @@ namespace CS114FinalProject
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+        
+        private void btn_schedule_Click(object sender, EventArgs e)
+        {
+
+            Logic.setSearch(textBox1.Text);
         }
     }
 }
