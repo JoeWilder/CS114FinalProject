@@ -26,7 +26,8 @@ namespace CS114FinalProject
             Logic.initRelevantTable();  //creates linker table with only the searched-for courses
             Logic.courseCompare();  //creates compatibility table comparing all sections of the searched-for courses
             Logic.PrintCompatTable();
-                
+
+            LogicPR.FindSchedules();
        }
 
 
