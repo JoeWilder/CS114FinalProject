@@ -28,6 +28,7 @@ namespace CS114FinalProject
             Logic.PrintCompatTable();
 
             LogicPR.FindSchedules();
+            LogicPR.findDuplicateSchedules();
        }
 
 

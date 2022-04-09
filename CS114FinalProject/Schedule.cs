@@ -10,11 +10,11 @@ namespace CS114FinalProject
     {
 
         private int ranking = 5;
-        public List<int> catalogrows;
+        public List<string> thecourses;
 
-        public Schedule( List<int> c_rows, int rank)
+        public Schedule( List<string> c_rows, int rank)
         {
-            catalogrows = c_rows;
+            thecourses = c_rows;
             ranking = rank;
         }
 

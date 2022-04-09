@@ -13,6 +13,10 @@ namespace CS114FinalProject
         public static int schedulesize = 5; // can change to number of searches 
         public static List<string> CurrentCourses;
 
+        public static List<string> BufferCourses = new List<string>(5) { "tseT", "tests", "buffer", "Strings", "here" };
+
+        public static List<string> CurrentCoursesNoSect;
+      
         public static void FindSchedules()
         {
 
@@ -41,29 +45,47 @@ namespace CS114FinalProject
                                         CurrentCourses = new List<string> { Logic.c[Logic.matchrows[a], 0], Logic.c[Logic.matchrows[b], 0],
                                             Logic.c[Logic.matchrows[c], 0], Logic.c[Logic.matchrows[d], 0], Logic.c[Logic.matchrows[e], 0] };
                                         
-                                        for (int num = 0; num < CurrentCourses.Count(); num++)
-                                        {//removing section number
-                                            int mk = CurrentCourses.ElementAt(num).LastIndexOf("-");
-                                            CurrentCourses[num] = CurrentCourses.ElementAt(num).Remove(mk);
+                                        
+                                        //removing section number from temporary list (NoSection one)
+                                        CurrentCoursesNoSect = new List<string> { Logic.c[Logic.matchrows[a], 0], Logic.c[Logic.matchrows[b], 0],
+                                            Logic.c[Logic.matchrows[c], 0], Logic.c[Logic.matchrows[d], 0], Logic.c[Logic.matchrows[e], 0] };
+
+                                        for (int num = 0; num < CurrentCoursesNoSect.Count(); num++)
+                                        {
+                                            int mk = CurrentCoursesNoSect.ElementAt(num).LastIndexOf("-");
+                                            CurrentCoursesNoSect[num] = CurrentCoursesNoSect.ElementAt(num).Remove(mk);
                                         }
 
-
-                                        IEnumerable<string> distinctcurrcourses = CurrentCourses.Distinct();
-                                        if (distinctcurrcourses.Count() == CurrentCourses.Count())
+                                        IEnumerable<string> distinctcurrcourses = CurrentCoursesNoSect.Distinct();
+                                        if (distinctcurrcourses.Count() == CurrentCoursesNoSect.Count())
                                         {
                                             //Console.WriteLine($"{a} + {b} + {c} + {d} + {e}");
-                                            //Console.WriteLine("No Duplicates Found (in course cs-114 vs cs-114");
+                                            Console.WriteLine("No Duplicate Courses. sorting list to elim dupe SCHEDULES later");
+                                            //todo could just use sort and forloop below instead of Distinct()
+                                            CurrentCourses.Sort();
 
-                                            if (1 == 2)
+                                            int count = 0;
+                                            for (int g = 0; g<CurrentCourses.Count()-1; g++)
                                             {
-
-                                                //need to elim duplicate schedules now tho.. like 01923 AND 93210 should not be allowed //todo
-
-
-
-                                                //   Schedule sch = new Schedule(CurrentCourses, 5);
-                                                //  possibleSchedules.Add(sch);
+                                                if (CurrentCourses.ElementAt(g) == BufferCourses.ElementAt(g))
+                                                {
+                                                    count++;
+                                                }
                                             }
+
+                                            //if (count < 5)//if NOT all the same classes
+                                            //{
+                                                Schedule sch = new Schedule(CurrentCourses, 5);
+                                                possibleSchedules.Add(sch);
+                                                BufferCourses = CurrentCourses;
+                                            //}
+                                            //else// if(count > 4)  //if all classes are the same as buffer
+                                            //{
+                                                BufferCourses = CurrentCourses;
+
+                                            //}
+
+
 
 
                                         }
@@ -78,12 +100,31 @@ namespace CS114FinalProject
                     }
                 }
 
-
-
                         
             }
         }
-    
-        
+
+        public static void findDuplicateSchedules()
+        {
+
+            foreach(Schedule sch in possibleSchedules)
+            {
+                foreach(string cour in sch.thecourses)
+                {
+                    Console.Write(cour + "_");
+                }
+                Console.WriteLine("");
+            }
+
+            
+
+
+
+        }
+
+
+
+
+
     }
 }
