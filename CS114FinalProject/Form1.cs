@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
 
 namespace CS114FinalProject
 {
@@ -16,31 +16,21 @@ namespace CS114FinalProject
         }
 
 
-        /* Listen for form load event */
        private void Form1_Load(object sender, EventArgs e)
        {
-            Logic.formatData();  //run only after refreshing database/file/webscrape
-
-
-            Logic.setSearch("CS-331", "CS-361", "CS-114","CS-114L", "CS-217");
-            Logic.initRelevantTable();  //creates linker table with only the searched-for courses
-            Logic.courseCompare();  //creates compatibility table comparing all sections of the searched-for courses
-            Logic.PrintCompatTable();
-                
+          
        }
 
-
+        //JW start
         /* Start new web browser window */
-       private void classDataButton_Click(object sender, EventArgs e)
+        private void classDataButton_Click(object sender, EventArgs e)
         {
            // WebbrowserForm webForm = new WebbrowserForm();
             //webForm.ShowDialog();
 
-
-            Logic.formatData();  //run only after refreshing database/file/webscrape
-
         }
-
+        //JW end
+        //PR start
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
@@ -57,13 +47,14 @@ namespace CS114FinalProject
 
         private void menuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            subject settingsForm = new subject(); //create pop up
-            settingsForm.Show();
+            
+
         }
 
         private void refreshCourseDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            subject settingsForm = new subject(); //create pop up
+            settingsForm.Show();
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -78,7 +69,7 @@ namespace CS114FinalProject
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            //
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -90,5 +81,63 @@ namespace CS114FinalProject
         {
 
         }
+        //PR end
+        //JK start
+        private void btn_schedule_Click(object sender, EventArgs e)
+        {
+            string[] raw = textBox1.Text.Split('\r', '\n');
+            List<string> rawsearches = new List<string>(raw);
+            if(rawsearches!= null && rawsearches[0] != "")
+            {
+
+                for (int h = 0; h < rawsearches.Count; h++)
+                {
+                    if (rawsearches[h] == "" || rawsearches[h] == " " || rawsearches[h] == "  ")
+                    {
+                        rawsearches.RemoveAt(h);
+                    }
+                }
+                //will catch and delete blank last lines of null, 1, or 2 spaces
+                if (rawsearches[(rawsearches.Count - 1)] == " " || rawsearches[(rawsearches.Count - 1)] == "" || rawsearches[(rawsearches.Count - 1)] == "  ")
+                {
+                    rawsearches.RemoveAt(rawsearches.Count - 1);
+                }
+
+                for (int b = 0; b < rawsearches.Count; b++)
+                {
+                    rawsearches[b] = rawsearches[b].Trim(' ');
+                }
+
+                Logic.setSearch(rawsearches);
+
+                Logic.formatData();
+                Logic.initRelevantTable();
+                Logic.courseCompare();
+                Logic.PrintCompatTable();
+
+                LogicPR.FindSchedules();
+                LogicPR.findDuplicateSchedules();
+
+                foreach (Schedule sch in LogicPR.possibleSchedules)
+                {
+                    MessageBox.Show(sch.stringcourses);
+                }
+
+                ScheduleResultsForm resultsForm = new ScheduleResultsForm();
+                resultsForm.Show();
+            }else
+            {
+                MessageBox.Show("ERROR: Please enter courses");
+            }
+        }
+
+        private void clearLocalDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //button resets coursedata.txt for if it gets too full
+            string file = AppDomain.CurrentDomain.BaseDirectory + "coursedata.txt";
+            File.Delete(file);
+            File.Create(file);
+        }
+        //JK end
     }
 }
