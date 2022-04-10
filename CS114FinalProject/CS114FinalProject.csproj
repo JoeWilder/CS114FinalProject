@@ -128,5 +128,8 @@
   <ItemGroup>
     <None Include="Resources\Add a subheading.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\FormsIconT.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

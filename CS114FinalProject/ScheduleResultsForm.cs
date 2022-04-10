@@ -20,7 +20,7 @@ namespace CS114FinalProject
 
         private void ScheduleResultsForm_Load(object sender, EventArgs e)
         {
-
+            //JK testing
             Label lbl = new Label();
 
             lbl.Text = "Hello World!";
@@ -59,23 +59,30 @@ namespace CS114FinalProject
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
-            int ycoord = 40;
+
+            //JK testing
+            int ycoord = 5;
             foreach (Schedule sched in LogicPR.possibleSchedules)
             {
                 Label lbl = new Label();
 
-                lbl.Text = (sched.thecourses[2]);
+                lbl.Text = (sched.stringcourses);
 
-                lbl.Location = new Point(127, ycoord);
-                ycoord += 50;
+                lbl.Location = new Point(200, ycoord);
+                ycoord += 15;
                 lbl.AutoSize = true;
-                lbl.Font = new Font("Arial", 12);
+                lbl.Font = new Font("Arial", 8);
                 lbl.ForeColor = Color.DarkSlateBlue;
-                lbl.Padding = new Padding(4);
+                lbl.Padding = new Padding(1);
 
                 //Add new control ^ to Form
                 this.Controls.Add(lbl);
             }
+        }
+
+        private void btn_devdata_Click(object sender, EventArgs e)
+        {
+            //future implementation
         }
     }
 }

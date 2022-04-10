@@ -1,6 +1,6 @@
 ﻿/* Name: Logic.cs
  * Purpose: static class to hold all funcationality related to creating course comparison tables
- * Notes: created by Jade 
+ * Author: Jade Kosa 
  */
 using System;
 using System.Collections.Generic;
@@ -14,10 +14,10 @@ namespace CS114FinalProject
     public static class Logic
     {
         
-
-
-        //Logic Table - filled by comparison method (both one-time things)
-        //"." is null. "Y" is compatible, "N" is non-compatible, "I" is Invalid (self comparison)
+        /**** Compat(ability) Table holds letters to indicate whether 2 course sections are compatible
+        *  Table is populated by CourseCompare() method
+        *  "." is null. "Y" is compatible, "N" is not, "I" is Invalid (self comparison), "U" is invalid (unknown time)
+        */
         public static string[,] compat = new string[18,18] {
             {".", ".",".",".",".",".",".",".",".",".", ".",".",".",".",".", ".",".",".",},
             {".", ".",".",".",".",".",".",".",".",".", ".",".",".",".",".", ".",".",".",},
@@ -40,19 +40,19 @@ namespace CS114FinalProject
         } ;
        
 
-        //user input (iterate thru 5-6 classes input) "CS-217" format
+        //user inputs searches in "CS-217" format
         public static List<string> search = new List<string> ();
 
+        //keeps track of how many course sections are relevant to the search
         public static int nummatches = 0;
         public static List<int> matchrows = new List<int>();
 
         // course catalog data
         public static string[] filedata;
-        public static string[,] c = new string[40, 10];
+        public static string[,] c = new string[60, 10];  //todo increase max
 
-        //sample/altered data for comparison//
-
-        public static string[,] ctest = new string[10, 10] {  //[down, over]
+        //sample/altered data for testing
+        public static string[,] ctest = new string[5, 10] {  //[down, over]
             {"FULLCODE", "CODE","NUM","SECTION", "NAME",
              "XT", "T1", "T2", "T3", "T4"},
             {"CS-217-09803", "CS","203","09803", "Soph Software Engineering",
@@ -60,40 +60,32 @@ namespace CS114FinalProject
             {"CS-217-10814", "CS","203","10814", "Soph Software Engineering",
              "2", "T-2", "F-2", ".", "."},
             {"CS-217-05812", "CS","217","05812", "Object Oriented Programming",
-             "2", "M-2", "F-2", ".", "."},
-            {"GAD-300-06800", "GAD","300","06800", "Object Oriented Programming",  
-             "2", "W-8", "M-8", ".", "."},
-            {"GAD-300-11811", "GAD","300","11811", "Database Systems", 
-             "3", "W-8", "T1230", "F8", "."},
-            {"GAD-300-21809", "GAD","300","21809", "Database Systems", 
-             "2", "W-8", "F-8", ".", "."},
-            {"GAD-30-04702", "GAD","300","04702", "3D Character Rigging/Animation", 
-             "3", "W-330", "W-5", "H-5", "."},
-            {"GAD-330-10702", "GAD","400","10702", "3D Character Rigging/Animation",
-             "2", "M-11", "H-11", ".", "."}, 
+             "2", "M-2", "F-2", ".", "."}, 
             {"GAD-300-13703", "GAD","300","13703", "Creature Design",
              "2", "T-11", "H-11", ".", "."}
-
         };
 
 
-        //trigger this once all 5-6 searches are filled (with user's courses)  //todo
+        /* 
+         * This Method creates List<int> matchrows based off of users searches.
+         * This List holds row numbers (rows in c/catalog) of relevant course sections
+         */
         public static string initRelevantTable()  
         {
             nummatches = 0; 
             matchrows = new List<int>();
 
-            for (int i = 1; i < c.GetUpperBound(0); i++)  //upperbound gets catalog height (?)
+            for (int i = 1; i < c.GetUpperBound(0); i++) 
             {
                 string course = c[i, 0];  
-                Console.WriteLine(course);
+                Console.WriteLine(course);  //wr
                 if(course != null)
                 {
-
-                    course = course.Remove(course.LastIndexOf("-"));  //removes everything after last -
+                    //removes section id from course to compare to user searches
+                    course = course.Remove(course.LastIndexOf("-")); 
                     course = course.Trim(' ');
-                    Console.WriteLine(course);
-                    bool found = false;  //to prevent duplicate entries
+                    Console.WriteLine(course);  //wr
+                    bool found = false;  
 
 
                     for (int s = 0; s < search.Count(); s++)
@@ -104,21 +96,14 @@ namespace CS114FinalProject
                             nummatches += 1;
                             matchrows.Add(i);
                             found = true;
-                            Console.WriteLine("i=" + i + ". match! search was: " + course);
-                            //break;  //use instead of bool? to break entire s loop if term found.
+                            Console.WriteLine("i=" + i + ". match! search was: " + course);  //wr
                         }
-
                     }
-
                 }
-                
 
-
-                //add an "if reached alphabetical AFTER last search term found, break? so doesnt search thru the ENTIRE thousands course catalog? 
-                //basically, work on optimization if at all possible. //todo
             }
 
-            //Findings
+            //Findings  //wr
             for (int w = 0; w < (matchrows.Count()); w++)
             {
                 Console.WriteLine("c row/ID: " + matchrows.ElementAt(w) + ", value: " + c[matchrows.ElementAt(w), 0]);
@@ -128,21 +113,9 @@ namespace CS114FinalProject
         }
 
 
-        /* Fills course section compatibility table (compat[,])
-         *  Example of how the 3 arrays relate:
-         *      ID 0 in compat (either dimension): holds "Y"/"N" compatibity for
-         *      ID 0 in matchrows (single Dim List<>): holds ID of course from c (catalog)
-         *      ID 23 down in c (catalog) row holds info about certain course section.
-         *  matchrows is the key that connects course section info (c) to its intercompatibilty (compat)
-         */
-        //ID of matchrows holds ID in c 
-        //ID of section in matchrows, plus 1, is ID in compat
+        /* courseCompare() method populates the course-section compatibility table (compat[,])  */
         public static string courseCompare()
         {
-            //compat = new string[15,15] { }; //tried to set to size of nummatches (but cant bc not constant)
-
-            //can start at . in each row, check compat only after, and then flip digits to fill in other half without having to calculate 2x
-
             /* (i) controls rows/down in the compat table */
             for (int i = 0; i < matchrows.Count(); i++) 
             {
@@ -168,7 +141,7 @@ namespace CS114FinalProject
                         int cXT = 2; 
 
                         if (!Int32.TryParse(s_cXT, out cXT)) {
-                            Console.WriteLine("Error Try Again in parsing. s: " + s_cXT + ", int: " + cXT);
+                            Console.WriteLine("Error Try Again in parsing. s: " + s_cXT + ", int: " + cXT);  //wr
                         } else {
                             Console.WriteLine("int parsed: " + cXT);
                         }
@@ -256,7 +229,8 @@ namespace CS114FinalProject
 
         }
 
-        /* SetSearch overloads: input a List<sting> (any size), or 4, 5  or 6 strings*/
+
+        /* setSearch method overloads: input a List<sting> (any size), or 4, 5 or 6 course strings */
         public static void setSearch(List<string> s)
         {
             search = s;
@@ -282,26 +256,22 @@ namespace CS114FinalProject
         }
 
 
-
+        /* formatData method takes the course data (saved local by WebbrowserForm) and puts it into 
+         * processable format of string[,] c */
         public static void formatData()
         {
             int eos; //index of current end of section
 
-            //default directory is FinalProject/bin/debug, may change when project built??
-            //File Format: Name@full-code-num@term@prof@Location@times@catergory@
-
-            //filedata = File.ReadAllLines("SampleData.txt");
             filedata = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "coursedata.txt");
 
             foreach (string line in filedata)
             {
-                Console.WriteLine(line);
+                Console.WriteLine(line);  //wr
             }
 
             for (int l = 0; l < filedata.Count(); l++)
             {
                 string currentline = filedata[l];
-
 
                 if (currentline == "" || currentline == " ")
                 {
@@ -309,9 +279,6 @@ namespace CS114FinalProject
                 }
                 else
                 {
-
-                
-
                     eos = currentline.IndexOf("(");
                     c[l, 4] = currentline.Substring(0, eos );  //Name of Course saved
 
@@ -333,11 +300,9 @@ namespace CS114FinalProject
 
                     currentline = currentline.Substring(0, eos); //cuts off end section, incl last @             
 
-                    Console.WriteLine(currentline); //temp
+                    Console.WriteLine(currentline); //wr
 
-
-    
-                     if ((currentline.Contains("Date TBD")) || (!currentline.Contains(":")))  //
+                     if ((currentline.Contains("Date TBD")) || (!currentline.Contains(":")))  
                      {
                          //Setting defaults
                         c[l, 5] = "2";
@@ -362,7 +327,6 @@ namespace CS114FinalProject
                         bool difflines = false;
 
                         //if before/after semicolon are same/contain each other, delete duplicate
-
                         if (currentline.Contains(";")) 
                         {
                             eos = currentline.IndexOf(";");
@@ -375,9 +339,7 @@ namespace CS114FinalProject
                             first = first.Trim(';');
                             second = second.Trim(';');
 
-
                             //determine when day letters end
-
                             eos = first.IndexOfAny(nums);  //days1/2 end at first number 
                             string days1 = first.Substring(0, eos);
                             first = first.Remove(0, eos);
@@ -390,29 +352,28 @@ namespace CS114FinalProject
                             days2 = days2.TrimStart(' ');
                             first = first.Trim(' ');
                             second = second.Trim(' ');
-                            //now first/second are times, days1/2 are days
+                            //first & second are times, days1 & days2 are days letters
 
-                            //Console.WriteLine($"first: _{first}_ adn second: _{second}_");
                             if (first.Contains(second) && days1.Contains(days2))
                             {
                                 currentline = days1 + " " + first;
-                            } else { //if they dont match  //todo incomplete-add logic here if time/priority
+                            } else { //if they dont match  //todo
                                 difflines = true; 
                             }
 
+                            //sync with main variables
                             days = days1;
                             times = first;
 
                         } else  
                         {
                             //determine when day letters end
-
                             eos = currentline.IndexOfAny(nums);  //returns index of first number 
 
                             days = currentline.Substring(0, eos);
                             times = currentline.Remove(0, eos);
 
-                            days = days.TrimStart(' ');  //leave trailing spaces for T 
+                            days = days.TrimStart(' ');  //leave trailing spaces for T uesdays
                             times = times.Trim(' ');
                         }
 
@@ -444,10 +405,9 @@ namespace CS114FinalProject
                             twoday = true;
                         }
 
-                        Console.WriteLine(days + "_" + times);//
+                        Console.WriteLine(days + "_" + times); //wr
 
                         //Determining how many blocks of time course meets for
-
                         eos = times.IndexOf("-");
 
                         string starttime = times.Substring(0, eos);
@@ -468,12 +428,12 @@ namespace CS114FinalProject
                         
                         }
 
-                        Console.WriteLine($"startime: _{starttime}_ and end: _{endtime}");
+                        Console.WriteLine($"startime: _{starttime}_ and end: _{endtime}");  //wr
                         Console.WriteLine($"startDT: _{startDT}_ and endDT: _{endDT}");
 
                         TimeSpan span = endDT.Subtract(startDT);
 
-                        ////IF TIMEBLOCK is longer than 1hr15min, class is double block
+                        ////IF timeblock is longer than 1hr15min, class is double block
                         if(span.TotalMinutes > 76)
                         {
                             xt++;
@@ -484,7 +444,7 @@ namespace CS114FinalProject
                                 starttime = ('0' +  starttime.Substring(marker-1, 4));  //"02:00" PM 
                             } else
                             {
-                                starttime = starttime.Substring(marker - 2, 5);  //"11:00" AM  //m+3?
+                                starttime = starttime.Substring(marker - 2, 5);  //"11:00" AM  
                             }
                             starttime = starttime.Trim(' ');
 
@@ -499,7 +459,7 @@ namespace CS114FinalProject
                             startDT = startDT.AddMinutes(90.0);
                             starttime = startDT.ToString(); 
 
-                            //saving just the time "00:00"
+                            //saving just the time
                             marker = starttime.IndexOf(":");
                             marker -= 2;
                             starttime = starttime.Substring(marker, 5);
@@ -520,9 +480,9 @@ namespace CS114FinalProject
                             }
 
 
-                            Console.WriteLine("starttime of second block: _" + starttime);
+                            Console.WriteLine("starttime of second block: _" + starttime);  //wr
                         }
-                        c[l, 5] = xt.ToString();  //* saves XT in catalog 
+                        c[l, 5] = xt.ToString();  //* saves XT(number of timeblocks) in catalog 
 
 
                         //*Saving to Catalog 
@@ -539,25 +499,21 @@ namespace CS114FinalProject
                             c[l, 7] = ".";
                             c[l, 8] = ".";
                             c[l, 9] = ".";
-                        } else if (xt ==3 && doubleblock && twoday) //2 days, 1 block 1 doubleblock
+                        } //Future implementation:
+                        else if (xt ==3 && doubleblock && twoday) //2 days, 1 block 1 doubleblock
                         {
 
                         } else if(twoday && difflines){ //2 days, 1 block at different times
-                            //see semicolor elseif above
+                            //see semicolon elseif above
                         }
                     
-
-
-
-
                      }//if not blank or tbd
                 }
-
-
+                
             } //end of l(ine) loop
 
 
-            //Print at end//temporary
+            //Print at end //wr
             for (int li = 0; li < (c.GetUpperBound(0)+1); li++)
             {
                 for (int m = 0; m < (c.GetUpperBound(1) +1); m++)

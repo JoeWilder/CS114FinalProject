@@ -49,7 +49,7 @@ namespace CS114FinalProject
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.webBrowser1);
             this.Name = "WebbrowserForm";
-            this.Text = "WebbrowserForm";
+            this.Text = "Gathering Course Data";
             this.Load += new System.EventHandler(this.WebbrowserForm_Load);
             this.ResumeLayout(false);
 

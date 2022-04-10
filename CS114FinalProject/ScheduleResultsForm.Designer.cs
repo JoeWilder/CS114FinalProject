@@ -29,9 +29,14 @@ namespace CS114FinalProject
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScheduleResultsForm));
             this.lbl_title = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btn_devdata = new System.Windows.Forms.Button();
+            this.lbl_scrollTest = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,14 +64,38 @@ namespace CS114FinalProject
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.splitContainer1.Panel1.Controls.Add(this.btn_devdata);
             this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.splitContainer1.Panel2.Controls.Add(this.lbl_scrollTest);
             this.splitContainer1.Size = new System.Drawing.Size(838, 452);
             this.splitContainer1.SplitterDistance = 279;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // btn_devdata
+            // 
+            this.btn_devdata.AutoSize = true;
+            this.btn_devdata.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btn_devdata.Location = new System.Drawing.Point(0, 408);
+            this.btn_devdata.Name = "btn_devdata";
+            this.btn_devdata.Size = new System.Drawing.Size(279, 44);
+            this.btn_devdata.TabIndex = 0;
+            this.btn_devdata.Text = "View Details Log\r\n(For Nerds)\r\n";
+            this.btn_devdata.UseVisualStyleBackColor = true;
+            this.btn_devdata.Click += new System.EventHandler(this.btn_devdata_Click);
+            // 
+            // lbl_scrollTest
+            // 
+            this.lbl_scrollTest.AutoSize = true;
+            this.lbl_scrollTest.Location = new System.Drawing.Point(179, 36);
+            this.lbl_scrollTest.Name = "lbl_scrollTest";
+            this.lbl_scrollTest.Size = new System.Drawing.Size(150, 748);
+            this.lbl_scrollTest.TabIndex = 0;
+            this.lbl_scrollTest.Text = resources.GetString("lbl_scrollTest.Text");
             // 
             // ScheduleResultsForm
             // 
@@ -76,9 +105,14 @@ namespace CS114FinalProject
             this.ClientSize = new System.Drawing.Size(862, 552);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.lbl_title);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScheduleResultsForm";
-            this.Text = "ScheduleResultsForm";
+            this.Text = "Your Schedule Options";
             this.Load += new System.EventHandler(this.ScheduleResultsForm_Load);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -90,5 +124,7 @@ namespace CS114FinalProject
 
         private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Button btn_devdata;
+        private System.Windows.Forms.Label lbl_scrollTest;
     }
 }

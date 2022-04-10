@@ -33,7 +33,6 @@ namespace CS114FinalProject
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshCourseDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -44,6 +43,10 @@ namespace CS114FinalProject
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_schedule = new System.Windows.Forms.Button();
+            this.clearLocalDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -57,19 +60,22 @@ namespace CS114FinalProject
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1077, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1077, 26);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "How To";
             // 
             // menuToolStripMenuItem
             // 
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem4,
             this.refreshCourseDataToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.clearLocalDatabaseToolStripMenuItem,
             this.toolStripMenuItem2});
             this.menuToolStripMenuItem.Font = new System.Drawing.Font("Lucida Sans Unicode", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(85, 26);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(85, 22);
             this.menuToolStripMenuItem.Text = "Options ";
             this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
             // 
@@ -77,14 +83,9 @@ namespace CS114FinalProject
             // 
             this.refreshCourseDataToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.refreshCourseDataToolStripMenuItem.Name = "refreshCourseDataToolStripMenuItem";
-            this.refreshCourseDataToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
-            this.refreshCourseDataToolStripMenuItem.Text = "Refresh Course Data";
+            this.refreshCourseDataToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
+            this.refreshCourseDataToolStripMenuItem.Text = "Gather Course Data";
             this.refreshCourseDataToolStripMenuItem.Click += new System.EventHandler(this.refreshCourseDataToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(237, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -102,14 +103,14 @@ namespace CS114FinalProject
             // 
             this.creditsToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
             this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
-            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
+            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.creditsToolStripMenuItem.Text = "Credits ";
             this.creditsToolStripMenuItem.Click += new System.EventHandler(this.creditsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(221, 6);
             // 
             // label1
             // 
@@ -128,7 +129,7 @@ namespace CS114FinalProject
             this.label2.ForeColor = System.Drawing.Color.Navy;
             this.label2.Location = new System.Drawing.Point(30, 417);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(471, 126);
+            this.label2.Size = new System.Drawing.Size(410, 147);
             this.label2.TabIndex = 4;
             this.label2.Text = resources.GetString("label2.Text");
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -149,7 +150,7 @@ namespace CS114FinalProject
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Lucida Sans Unicode", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(643, 109);
+            this.label3.Location = new System.Drawing.Point(652, 107);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(197, 21);
             this.label3.TabIndex = 6;
@@ -191,12 +192,35 @@ namespace CS114FinalProject
             this.btn_schedule.UseVisualStyleBackColor = true;
             this.btn_schedule.Click += new System.EventHandler(this.btn_schedule_Click);
             // 
+            // clearLocalDatabaseToolStripMenuItem
+            // 
+            this.clearLocalDatabaseToolStripMenuItem.ForeColor = System.Drawing.Color.Navy;
+            this.clearLocalDatabaseToolStripMenuItem.Name = "clearLocalDatabaseToolStripMenuItem";
+            this.clearLocalDatabaseToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
+            this.clearLocalDatabaseToolStripMenuItem.Text = "Clear Local Database";
+            this.clearLocalDatabaseToolStripMenuItem.Click += new System.EventHandler(this.clearLocalDatabaseToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(240, 6);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(240, 6);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(240, 6);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1077, 552);
+            this.ClientSize = new System.Drawing.Size(1077, 610);
             this.Controls.Add(this.btn_schedule);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -205,10 +229,11 @@ namespace CS114FinalProject
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Course Registration Schedule Helper";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -229,10 +254,13 @@ namespace CS114FinalProject
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btn_schedule;
+        private System.Windows.Forms.ToolStripMenuItem clearLocalDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
     }
 }
 
