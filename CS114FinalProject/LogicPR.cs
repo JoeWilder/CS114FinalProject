@@ -57,7 +57,7 @@ namespace CS114FinalProject
                                         }
 
                                         IEnumerable<string> distinctcurrcourses = CurrentCoursesNoSect.Distinct();
-                                        if (distinctcurrcourses.Count() == CurrentCoursesNoSect.Count())
+                                        if (distinctcurrcourses.Count() == CurrentCoursesNoSect.Count())  //if no duplicate courses:
                                         {
                                             //Console.WriteLine($"{a} + {b} + {c} + {d} + {e}");
                                             Console.WriteLine("No Duplicate Courses. sorting list to elim dupe SCHEDULES later");
@@ -65,7 +65,7 @@ namespace CS114FinalProject
                                             CurrentCourses.Sort();
 
                                             int count = 0;
-                                            for (int g = 0; g<CurrentCourses.Count()-1; g++)
+                                            for (int g = 0; g<CurrentCourses.Count()-1; g++)  //checking duplicate schedules step1
                                             {
                                                 if (CurrentCourses.ElementAt(g) == BufferCourses.ElementAt(g))
                                                 {
@@ -73,17 +73,17 @@ namespace CS114FinalProject
                                                 }
                                             }
 
-                                            //if (count < 5)//if NOT all the same classes
-                                            //{
+                                            if (count < 5)//if not alll the same classes as buffer sch
+                                            {
                                                 Schedule sch = new Schedule(CurrentCourses, 5);
                                                 possibleSchedules.Add(sch);
                                                 BufferCourses = CurrentCourses;
-                                            //}
-                                            //else// if(count > 4)  //if all classes are the same as buffer
-                                            //{
+                                            }
+                                            else// if(count > 4)  //if all classes are the same as buffer
+                                            {
                                                 BufferCourses = CurrentCourses;
 
-                                            //}
+                                            }
 
 
 
@@ -107,15 +107,82 @@ namespace CS114FinalProject
         public static void findDuplicateSchedules()
         {
 
-            foreach(Schedule sch in possibleSchedules)
+            //possibleSchedules.Sort( (x,y) +> x.thecourses.CompareTo(  );
+            //List<Schedule> sortedpossschd = possibleSchedules.OrderBy(o => o.ToString).ToList();
+            
+            
+            possibleSchedules.Sort((x ,y) => x.ToString().CompareTo(y.ToString()));  //!!!!
+
+            //IEnumerable<Schedule> distinctschedulelist = possibleSchedules.Distinct((x,y)=>x.ToString().CompareTo(y.ToString()));
+            //int uniqueschedules = (distinctschedulelist.Count());
+            ////var distinctscheduleslist = possibleSchedules.Distinct(x => x.ToString).ToList();
+            
+            List<Schedule> distinctscheduleslist = possibleSchedules.Distinct().ToList();
+            
+            
+            
+            //want to remove num+1 until num != num+1
+           /* int num = 0;
+            while(possibleSchedules.ElementAt(num).ToString() == possibleSchedules.ElementAt(num).ToString())
             {
-                foreach(string cour in sch.thecourses)
+                possibleSchedules.RemoveAt(num);
+                num++;
+            }
+
+            
+            int stct = possibleSchedules.Count();
+
+            for(int n = 0; n<stct; n++)
+            {
+                if (possibleSchedules.ElementAt(n).ToString() == possibleSchedules.ElementAt(n+1).ToString())
+                {
+                    possibleSchedules.RemoveAt(n+1);
+                }
+
+            }
+           */
+           /*
+            for (int num = 0; num<possibleSchedules.Count()-1; num++)
+            {
+
+                if(possibleSchedules.ElementAt(num).ToString() == (possibleSchedules.ElementAt(num+1).ToString())) 
+                { 
+                    possibleSchedules.RemoveAt(num+1); 
+                   Console.WriteLine("Removed a course");
+                }
+                else
+                {
+                    Console.WriteLine("still here not deleted._"+num);
+
+                   
+                }
+
+            }
+            
+               */
+                
+           // }
+
+            //Printing Schedules
+            /*
+            for(int num = 0; num < possibleSchedules.Count(); num++)
+            {
+                foreach (string cour in possibleSchedules.ElementAt(num).thecourses)
                 {
                     Console.Write(cour + "_");
                 }
                 Console.WriteLine("");
             }
-
+            */
+           foreach (Schedule sch in distinctscheduleslist)
+            {
+                foreach(string cour in sch.thecourses)
+                {
+                    Console.Write(cour + "-");
+                }
+                Console.WriteLine("");
+            }
+           
             
 
 
@@ -127,4 +194,10 @@ namespace CS114FinalProject
 
 
     }
+
+
+
+
+
+
 }
