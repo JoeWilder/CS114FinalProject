@@ -20,6 +20,15 @@ namespace CS114FinalProject
             stringcourses = (c_rows[0] + ","+c_rows[1] + "," + c_rows[2] + "," + c_rows[3] + "," + c_rows[4]);
         }
 
+        public void PrintSchedule()
+        {
+            foreach(string c in thecourses)
+            {
+                Console.Write(c + "_");
+            }
+            Console.WriteLine("");
+        }
+
         public override string ToString()
         {
             return "[" + thecourses[0] + "," + thecourses[1] + "," + thecourses[2] + "," + thecourses[3] + "," + thecourses[4] + "]";

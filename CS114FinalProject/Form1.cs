@@ -29,6 +29,11 @@ namespace CS114FinalProject
 
             LogicPR.FindSchedules();
             LogicPR.findDuplicateSchedules();
+
+            foreach (Schedule f in LogicPR.possibleSchedules)
+            {
+                f.PrintSchedule();
+            }
        }
 
 
@@ -95,8 +100,37 @@ namespace CS114FinalProject
         
         private void btn_schedule_Click(object sender, EventArgs e)
         {
+            string[] raw = textBox1.Text.Split('\r', '\n');
+            List<string> rawsearches = new List<string>(raw);
 
-            //Logic.setSearch(textBox1.Text);
+            for (int h = 0; h < rawsearches.Count; h++)
+            {
+                if (rawsearches[h] == "" || rawsearches[h] == " " || rawsearches[h] =="  ")
+                {
+                    rawsearches.RemoveAt(h);
+                }
+            }
+            //will catch and delete blank last lines of null, 1, or 2 spaces
+            if(rawsearches[(rawsearches.Count-1)] == " " || rawsearches[(rawsearches.Count - 1)] == "" || rawsearches[(rawsearches.Count - 1)] == "  ")
+            {
+                rawsearches.RemoveAt(rawsearches.Count - 1);
+            }
+
+            for (int b = 0; b < rawsearches.Count; b++)
+            {
+                rawsearches[b] = rawsearches[b].Trim(' ');
+            }
+
+            //Logic.setSearch(rawsearches);
+
+
+           /* //printing searchs
+            for (int b = 0; b< rawsearches.Count; b++)
+            {
+                Console.Write("--" + rawsearches[b] + "--");
+            }
+            */
+
         }
     }
 }

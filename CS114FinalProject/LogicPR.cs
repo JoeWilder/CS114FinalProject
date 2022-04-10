@@ -9,17 +9,16 @@ namespace CS114FinalProject
     public static class LogicPR
     {
         public static List<Schedule> possibleSchedules;
+        private static List<Schedule> distinctscheduleslist;
 
         public static int schedulesize = 5; // can change to number of searches 
         public static List<string> CurrentCourses;
 
-        public static List<string> BufferCourses = new List<string>(5) { "tseT", "tests", "buffer", "Strings", "here" };
-
-        public static List<string> CurrentCoursesNoSect;
+        private static List<string> BufferCourses = new List<string>(5) { "tseT", "tests", "buffer", "Strings", "here" };
+        private static List<string> CurrentCoursesNoSect;
       
         public static void FindSchedules()
         {
-
             possibleSchedules = new List<Schedule>();
 
             for (int i = 0; i < Logic.nummatches; i++)
@@ -106,87 +105,11 @@ namespace CS114FinalProject
 
         public static void findDuplicateSchedules()
         {
-
-            //possibleSchedules.Sort( (x,y) +> x.thecourses.CompareTo(  );
-            //List<Schedule> sortedpossschd = possibleSchedules.OrderBy(o => o.ToString).ToList();
-            
-            
             possibleSchedules.Sort((x ,y) => x.ToString().CompareTo(y.ToString()));  //!!!!
-
-            //IEnumerable<Schedule> distinctschedulelist = possibleSchedules.Distinct((x,y)=>x.ToString().CompareTo(y.ToString()));
-            //int uniqueschedules = (distinctschedulelist.Count());
-            ////var distinctscheduleslist = possibleSchedules.Distinct(x => x.ToString).ToList();
             
-            List<Schedule> distinctscheduleslist = possibleSchedules.Distinct().ToList();
-            
-            
-            
-            //want to remove num+1 until num != num+1
-           /* int num = 0;
-            while(possibleSchedules.ElementAt(num).ToString() == possibleSchedules.ElementAt(num).ToString())
-            {
-                possibleSchedules.RemoveAt(num);
-                num++;
-            }
+            distinctscheduleslist = possibleSchedules.Distinct().ToList();
 
-            
-            int stct = possibleSchedules.Count();
-
-            for(int n = 0; n<stct; n++)
-            {
-                if (possibleSchedules.ElementAt(n).ToString() == possibleSchedules.ElementAt(n+1).ToString())
-                {
-                    possibleSchedules.RemoveAt(n+1);
-                }
-
-            }
-           */
-           /*
-            for (int num = 0; num<possibleSchedules.Count()-1; num++)
-            {
-
-                if(possibleSchedules.ElementAt(num).ToString() == (possibleSchedules.ElementAt(num+1).ToString())) 
-                { 
-                    possibleSchedules.RemoveAt(num+1); 
-                   Console.WriteLine("Removed a course");
-                }
-                else
-                {
-                    Console.WriteLine("still here not deleted._"+num);
-
-                   
-                }
-
-            }
-            
-               */
-                
-           // }
-
-            //Printing Schedules
-            /*
-            for(int num = 0; num < possibleSchedules.Count(); num++)
-            {
-                foreach (string cour in possibleSchedules.ElementAt(num).thecourses)
-                {
-                    Console.Write(cour + "_");
-                }
-                Console.WriteLine("");
-            }
-            */
-           foreach (Schedule sch in distinctscheduleslist)
-            {
-                foreach(string cour in sch.thecourses)
-                {
-                    Console.Write(cour + "-");
-                }
-                Console.WriteLine("");
-            }
-           
-            
-
-
-
+            possibleSchedules = distinctscheduleslist;
         }
 
 
@@ -194,10 +117,5 @@ namespace CS114FinalProject
 
 
     }
-
-
-
-
-
 
 }
