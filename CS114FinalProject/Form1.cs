@@ -19,6 +19,7 @@ namespace CS114FinalProject
         /* Listen for form load event */
        private void Form1_Load(object sender, EventArgs e)
        {
+           /*
             Logic.formatData();  //run only after refreshing database/file/webscrape
 
 
@@ -34,6 +35,7 @@ namespace CS114FinalProject
             {
                 f.PrintSchedule();
             }
+           */
        }
 
 
@@ -44,7 +46,7 @@ namespace CS114FinalProject
             //webForm.ShowDialog();
 
 
-            Logic.formatData();  //run only after refreshing database/file/webscrape
+            //Logic.formatData();  //run only after refreshing database/file/webscrape
 
         }
 
@@ -121,15 +123,28 @@ namespace CS114FinalProject
                 rawsearches[b] = rawsearches[b].Trim(' ');
             }
 
-            //Logic.setSearch(rawsearches);
+            Logic.setSearch(rawsearches);
 
+            Logic.formatData();
+            Logic.initRelevantTable();  
+            Logic.courseCompare();
+            Logic.PrintCompatTable();
 
-           /* //printing searchs
-            for (int b = 0; b< rawsearches.Count; b++)
+            LogicPR.FindSchedules();
+            LogicPR.findDuplicateSchedules();
+
+            foreach(Schedule sch in LogicPR.possibleSchedules)
             {
-                Console.Write("--" + rawsearches[b] + "--");
+                 MessageBox.Show(sch.stringcourses);
             }
-            */
+           
+
+            /* //printing searchs
+             for (int b = 0; b< rawsearches.Count; b++)
+             {
+                 Console.Write("--" + rawsearches[b] + "--");
+             }
+             */
 
         }
     }
