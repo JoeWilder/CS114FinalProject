@@ -125,9 +125,10 @@
 Go to Options&gt;Gather Course Data to
 choose the subjects of the classes you want
 to search in. 
-When finished, input Five classes
+When finished, input 5-7 classes
 into the text box. Put each class 
-on a seperate line. Example (CS-114). </value>
+on a seperate line. Example (CS-114). 
+Each Schedule will only have 5 classes.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
