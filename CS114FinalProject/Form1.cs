@@ -137,7 +137,10 @@ namespace CS114FinalProject
             {
                  MessageBox.Show(sch.stringcourses);
             }
-           
+
+            ScheduleResultsForm resultsForm = new ScheduleResultsForm();
+            resultsForm.Show();
+            //vs showdialog? modal?
 
             /* //printing searchs
              for (int b = 0; b< rawsearches.Count; b++)
