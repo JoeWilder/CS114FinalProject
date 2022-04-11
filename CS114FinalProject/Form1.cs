@@ -135,8 +135,7 @@ namespace CS114FinalProject
         {
             //button resets coursedata.txt for if it gets too full
             string file = AppDomain.CurrentDomain.BaseDirectory + "coursedata.txt";
-            File.Delete(file);
-            File.Create(file);
+            File.WriteAllLines(file, new List<string>());
         }
         //JK end
     }
