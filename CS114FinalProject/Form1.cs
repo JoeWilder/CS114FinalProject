@@ -13,6 +13,7 @@ namespace CS114FinalProject
         public Form1()
         {
             InitializeComponent();
+            LogicPR.PossibleSchedule();
         }
 
 
