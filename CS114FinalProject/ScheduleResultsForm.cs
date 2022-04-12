@@ -77,14 +77,20 @@ namespace CS114FinalProject
 
 
                 Label lbl = new Label();
-                lbl.Text = ("Option "+ count + '\n'+sched.stringcourses);
+                lbl.Text = ("Option "+ count + '\n'+sched.getNamesinOrder_string() + '\n'
+                    + sched.getWhen_FullSched_string() + ".");
 
                 lbl.Location = new Point(30, ycoord);
                 ycoord += 60;
                 lbl.AutoSize = true;
-                lbl.Font = new Font("Arial", 10, FontStyle.Bold);
+                lbl.Font = new Font("Arial", 9, FontStyle.Bold);
                 lbl.ForeColor = Color.DarkSlateBlue;
                 lbl.Padding = new Padding(1);
+                if(count%2 == 0)
+                {  lbl.BackColor = Color.WhiteSmoke;
+                } else {
+                    lbl.BackColor = Color.LightGray;
+                }
 
                 //Add new control ^ to Form
                 this.Controls.Add(lbl);

@@ -16,6 +16,7 @@ namespace CS114FinalProject
         public static List<Schedule> possibleSchedules;
         //List of strings to hold the current set of 5 courses being evaluated
         public static List<string> CurrentCourses;
+        public static List<int> IDs_CurrentCourses;
 
         private static List<Schedule> distinctscheduleslist;
         public static int schedulesize = 5; // future implementation 
@@ -48,15 +49,15 @@ namespace CS114FinalProject
                                     {
                                         ///Console.WriteLine("All 5 sections compatable with all others");  //wr
 
+                                        IDs_CurrentCourses = new List<int> { a, b, c, d, e };
+
                                         CurrentCourses = new List<string> { Logic.c[Logic.matchrows[a], 0], Logic.c[Logic.matchrows[b], 0],
                                             Logic.c[Logic.matchrows[c], 0], Logic.c[Logic.matchrows[d], 0], Logic.c[Logic.matchrows[e], 0] };
                                         
 
                                         //removing section number from list  to remove duplicate courses (and course sections)
-
                                         CurrentCoursesNoSect = new List<string> { Logic.c[Logic.matchrows[a], 0], Logic.c[Logic.matchrows[b], 0],
                                             Logic.c[Logic.matchrows[c], 0], Logic.c[Logic.matchrows[d], 0], Logic.c[Logic.matchrows[e], 0] };
-
                                         for (int num = 0; num < CurrentCoursesNoSect.Count(); num++)
                                         {
                                             int mk = CurrentCoursesNoSect.ElementAt(num).LastIndexOf("-");
@@ -66,6 +67,12 @@ namespace CS114FinalProject
                                         IEnumerable<string> distinctcurrcourses = CurrentCoursesNoSect.Distinct();
                                         if (distinctcurrcourses.Count() == CurrentCoursesNoSect.Count())  //if no duplicate courses:
                                         {
+                                            /*
+                                            Schedule sch = new Schedule(CurrentCourses, IDs_CurrentCourses, 5);
+                                            possibleSchedules.Add(sch);
+                                            */
+
+
                                             ///Console.WriteLine("No Duplicate Courses. sorting list to elim dupe SCHEDULES later");  //wr
                                             CurrentCourses.Sort();
 
@@ -80,7 +87,7 @@ namespace CS114FinalProject
 
                                             if (count < 5)//if not identical to buffer schedule, create new Schedule object
                                             {
-                                                Schedule sch = new Schedule(CurrentCourses, 5);
+                                                Schedule sch = new Schedule(CurrentCourses, IDs_CurrentCourses, 5);
                                                 possibleSchedules.Add(sch);
                                                 BufferCourses = CurrentCourses;
                                             }
@@ -89,6 +96,8 @@ namespace CS114FinalProject
                                                 BufferCourses = CurrentCourses;
 
                                             }
+
+                                            
 
                                         }
 
@@ -112,10 +121,12 @@ namespace CS114FinalProject
         /* Method sets possibleSchedules List to NOT include any duplicate schedules */
         public static void findDuplicateSchedules()
         {
+           
+            //compares (now sorted) ToString override of Schedule's classes to sort Schedule list
             possibleSchedules.Sort((x ,y) => x.ToString().CompareTo(y.ToString()));  
-            
-            distinctscheduleslist = possibleSchedules.Distinct().ToList();
 
+            //creates new list of only unique Schedules
+            distinctscheduleslist = possibleSchedules.Distinct().ToList();
             possibleSchedules = distinctscheduleslist;
         }
 

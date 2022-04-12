@@ -52,9 +52,8 @@ namespace CS114FinalProject
         public static string[,] c = new string[60, 10];  //todo increase max
 
         //sample/altered data for testing
-        public static string[,] ctest = new string[5, 10] {  //[down, over]
-            {"FULLCODE", "CODE","NUM","SECTION", "NAME",
-             "XT", "T1", "T2", "T3", "T4"},
+        //Format: {"FULLCODE", "CODE","NUM","SECTION", "NAME", "XT", "T1", "T2", "T3", "T4"},
+        public static string[,] ctest = new string[4, 10] {  //[down, over]
             {"CS-217-09803", "CS","203","09803", "Soph Software Engineering",
              "2", "M-2", "H-2", ".", "."},
             {"CS-217-10814", "CS","203","10814", "Soph Software Engineering",
@@ -425,7 +424,6 @@ namespace CS114FinalProject
                             starttime = starttime.Substring(marker - 2, 5);
                         } else {
                             starttime = ('0' + starttime.Substring(marker - 1, 4));
-                        
                         }
 
                         Console.WriteLine($"startime: _{starttime}_ and end: _{endtime}");  //wr
@@ -440,7 +438,7 @@ namespace CS114FinalProject
                             doubleblock = true;
 
                             marker = starttime.IndexOf(":");
-                            if (marker == 2){
+                            if (marker == 1){
                                 starttime = ('0' +  starttime.Substring(marker-1, 4));  //"02:00" PM 
                             } else
                             {
