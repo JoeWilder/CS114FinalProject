@@ -1,4 +1,5 @@
-﻿using System;
+﻿//JK starts
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,9 @@ namespace CS114FinalProject
         public List<int> thecoursesMRID;
         //use thecoursesMRID for all referneces
 
-
         public List<string> thecourses;
         public string stringcourses;
+
 
         public Schedule( List<string> c_rows, List<int> MRID, int rank)
         {
@@ -28,7 +29,6 @@ namespace CS114FinalProject
 
         //thecoursesMRID index 0 holds a matchrows index number ,
         //which each hold the catalog c row number that contains all course info
-        
         public void sortmanually()
         {
             int temp;
@@ -46,9 +46,8 @@ namespace CS114FinalProject
                 }
 
             }
-
-
         }
+
 
         public List<string> getNamesinOrder()
         {
@@ -131,14 +130,11 @@ namespace CS114FinalProject
         {
             return stringcourses.GetHashCode();
         }
-        /*public List<string> getCourses()
-        {
-            return ();
-        }
-        */
+       
 
         ~Schedule()
         { }
 
     }
 }
+//JK ends

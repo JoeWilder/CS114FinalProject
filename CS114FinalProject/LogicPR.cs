@@ -41,14 +41,11 @@ namespace CS114FinalProject
                             {
                                 for (int a = 0; a < Logic.nummatches; a++)
                                 {
-                                    //Console.WriteLine($"{a} + {b} + {c} + {d} + {e}");  //wr
-
                                     if (Logic.compat[a, b] == "Y" && Logic.compat[a, c] == "Y" && Logic.compat[a, d] == "Y" && Logic.compat[a, e] == "Y" &&
                                             Logic.compat[b, c] == "Y" && Logic.compat[b, d] == "Y" && Logic.compat[b, e] == "Y" && Logic.compat[c, d] == "Y" &&
                                             Logic.compat[c, e] == "Y" && Logic.compat[d, e] == "Y")
                                     {
-                                        ///Console.WriteLine("All 5 sections compatable with all others");  //wr
-
+                                      
                                         IDs_CurrentCourses = new List<int> { a, b, c, d, e };
 
                                         CurrentCourses = new List<string> { Logic.c[Logic.matchrows[a], 0], Logic.c[Logic.matchrows[b], 0],
@@ -67,13 +64,7 @@ namespace CS114FinalProject
                                         IEnumerable<string> distinctcurrcourses = CurrentCoursesNoSect.Distinct();
                                         if (distinctcurrcourses.Count() == CurrentCoursesNoSect.Count())  //if no duplicate courses:
                                         {
-                                            /*
-                                            Schedule sch = new Schedule(CurrentCourses, IDs_CurrentCourses, 5);
-                                            possibleSchedules.Add(sch);
-                                            */
-
-
-                                            ///Console.WriteLine("No Duplicate Courses. sorting list to elim dupe SCHEDULES later");  //wr
+                                            
                                             CurrentCourses.Sort();
 
                                             int count = 0;
