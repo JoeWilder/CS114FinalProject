@@ -69,7 +69,7 @@ namespace CS114FinalProject
                 names.Add(Logic.c[Logic.matchrows[thecoursesMRID[i]], 0]);
 
             }
-            return (names[0] + ",   " + names[1] + ",   "+names[2] + ",   "+names[3] + ",   "+names[4]);
+            return (names[0] + ",    " + names[1] + ",    "+names[2] + ",    "+names[3] + ",    "+names[4]);
         }
 
         public string getWhen(int courseOrderNumber)//pass in the number in the mrid list 0-4
@@ -82,7 +82,7 @@ namespace CS114FinalProject
                 w.Add(Logic.c[Logic.matchrows[thecoursesMRID[courseOrderNumber]], 6+n]);
             }
 
-            if (xt == 1)      { return (w[0]) + ".  ";  }
+            if (xt == 1)      { return ("       "+ w[0]) + ".    ";  }
             else if (xt ==2)  { return (w[0] + "," + w[1]) + ".  "; }
             else if (xt == 3) { return (w[0] + "," + w[1] + ", " + w[2] + ".  "); }
             else if (xt == 4) { return (w[0] + "," + w[1] + ", " + w[2] + ", " + w[3] + ".  "); }

@@ -117,53 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lbl_scrollTest.Text" xml:space="preserve">
-    <value>label1 Scrolling test
-label1 Scrolling tesfdst
-label1 Scrosdflling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrosdflling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 sdfScrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrollingsdf test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 sdfScrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-label1 Scrolling test
-
-</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
