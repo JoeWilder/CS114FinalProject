@@ -20,7 +20,12 @@ namespace CS114FinalProject
 
         private void ScheduleResultsForm_Load(object sender, EventArgs e)
         {
+
+            
+            
+            
             //JK testing
+            /*
             Label lbl = new Label();
 
             lbl.Text = "Hello World!";
@@ -32,7 +37,7 @@ namespace CS114FinalProject
 
             //Add new control ^ to Form
             this.Controls.Add(lbl);
-            
+            */
         }
 
         private void lbl_title_Click(object sender, EventArgs e)
@@ -48,8 +53,11 @@ namespace CS114FinalProject
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
+            RadioButton rad = new RadioButton();
+            rad.Location = new Point(30, 40);
+            rad.Text = "Option";
+            this.Controls.Add(rad);
 
-            
         }
 
         private void groupBox_selectA_MouseHover(object sender, EventArgs e)
@@ -61,28 +69,42 @@ namespace CS114FinalProject
         {
 
             //JK testing
-            int ycoord = 5;
+            int ycoord = 80;
+            int count = 1;
             foreach (Schedule sched in LogicPR.possibleSchedules)
             {
+                //string when = 
+
+
                 Label lbl = new Label();
+                lbl.Text = ("Option "+ count + '\n'+sched.stringcourses);
 
-                lbl.Text = (sched.stringcourses);
-
-                lbl.Location = new Point(200, ycoord);
-                ycoord += 15;
+                lbl.Location = new Point(30, ycoord);
+                ycoord += 60;
                 lbl.AutoSize = true;
-                lbl.Font = new Font("Arial", 8);
+                lbl.Font = new Font("Arial", 10, FontStyle.Bold);
                 lbl.ForeColor = Color.DarkSlateBlue;
                 lbl.Padding = new Padding(1);
 
                 //Add new control ^ to Form
                 this.Controls.Add(lbl);
+                count++;
             }
         }
 
         private void btn_devdata_Click(object sender, EventArgs e)
         {
             //future implementation
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            ////
         }
     }
 }

@@ -34,6 +34,7 @@ namespace CS114FinalProject
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btn_devdata = new System.Windows.Forms.Button();
             this.lbl_scrollTest = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -58,12 +59,13 @@ namespace CS114FinalProject
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.BackColor = System.Drawing.Color.Gainsboro;
-            this.splitContainer1.Location = new System.Drawing.Point(12, 88);
+            this.splitContainer1.Location = new System.Drawing.Point(12, 385);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox1);
             this.splitContainer1.Panel1.Controls.Add(this.btn_devdata);
             this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             // 
@@ -72,7 +74,8 @@ namespace CS114FinalProject
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.splitContainer1.Panel2.Controls.Add(this.lbl_scrollTest);
-            this.splitContainer1.Size = new System.Drawing.Size(838, 452);
+            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
+            this.splitContainer1.Size = new System.Drawing.Size(838, 155);
             this.splitContainer1.SplitterDistance = 279;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -80,7 +83,7 @@ namespace CS114FinalProject
             // 
             this.btn_devdata.AutoSize = true;
             this.btn_devdata.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btn_devdata.Location = new System.Drawing.Point(0, 408);
+            this.btn_devdata.Location = new System.Drawing.Point(0, 111);
             this.btn_devdata.Name = "btn_devdata";
             this.btn_devdata.Size = new System.Drawing.Size(279, 44);
             this.btn_devdata.TabIndex = 0;
@@ -96,6 +99,21 @@ namespace CS114FinalProject
             this.lbl_scrollTest.Size = new System.Drawing.Size(150, 748);
             this.lbl_scrollTest.TabIndex = 0;
             this.lbl_scrollTest.Text = resources.GetString("lbl_scrollTest.Text");
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.ForeColor = System.Drawing.Color.Navy;
+            this.checkBox1.Location = new System.Drawing.Point(47, 63);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(116, 29);
+            this.checkBox1.TabIndex = 1;
+            this.checkBox1.Text = "Option 1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // ScheduleResultsForm
             // 
@@ -126,5 +144,6 @@ namespace CS114FinalProject
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button btn_devdata;
         private System.Windows.Forms.Label lbl_scrollTest;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
