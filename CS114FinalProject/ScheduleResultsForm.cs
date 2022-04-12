@@ -21,29 +21,49 @@ namespace CS114FinalProject
         private void ScheduleResultsForm_Load(object sender, EventArgs e)
         {
 
-            
-            
-            
             //JK testing
-            /*
-            Label lbl = new Label();
+            int ycoord = 80;
+            int count = 1;
+            foreach (Schedule sched in LogicPR.possibleSchedules)
+            {
 
-            lbl.Text = "Hello World!";
-            lbl.Location = new Point(20, 20);
-            lbl.AutoSize = true;
-            lbl.Font = new Font("Arial", 12);
-             lbl.ForeColor = Color.Green;
-            lbl.Padding = new Padding(6);
+                Label lbl = new Label();
+                lbl.Text = ("Option " + count + '\n' + sched.getNamesinOrder_string() + '\n'
+                    + sched.getWhen_FullSched_string() + ".");
 
-            //Add new control ^ to Form
-            this.Controls.Add(lbl);
-            */
+                lbl.Location = new Point(30, ycoord);
+                ycoord += 60;
+                lbl.AutoSize = true;
+                lbl.Font = new Font("Arial", 9, FontStyle.Bold);
+                lbl.ForeColor = Color.DarkSlateBlue;
+                lbl.Padding = new Padding(1);
+                if (count % 2 == 0)
+                {
+                    lbl.BackColor = Color.WhiteSmoke;
+                }
+                else
+                {
+                    lbl.BackColor = Color.LightGray;
+                }
+
+                //Add new control ^ to Form
+                this.Controls.Add(lbl);
+                count++;
+            }
+
+
+            
         }
 
         private void lbl_title_Click(object sender, EventArgs e)
         {
 
         }
+
+
+
+
+
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -53,10 +73,7 @@ namespace CS114FinalProject
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-            RadioButton rad = new RadioButton();
-            rad.Location = new Point(30, 40);
-            rad.Text = "Option";
-            this.Controls.Add(rad);
+            
 
         }
 
@@ -67,35 +84,11 @@ namespace CS114FinalProject
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
-
-            //JK testing
-            int ycoord = 80;
-            int count = 1;
-            foreach (Schedule sched in LogicPR.possibleSchedules)
-            {
-                //string when = 
-
-
-                Label lbl = new Label();
-                lbl.Text = ("Option "+ count + '\n'+sched.stringcourses);
-
-                lbl.Location = new Point(30, ycoord);
-                ycoord += 60;
-                lbl.AutoSize = true;
-                lbl.Font = new Font("Arial", 10, FontStyle.Bold);
-                lbl.ForeColor = Color.DarkSlateBlue;
-                lbl.Padding = new Padding(1);
-
-                //Add new control ^ to Form
-                this.Controls.Add(lbl);
-                count++;
-            }
+            //
+            
         }
 
-        private void btn_devdata_Click(object sender, EventArgs e)
-        {
-            //future implementation
-        }
+       
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
