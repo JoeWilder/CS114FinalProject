@@ -24,8 +24,25 @@ namespace CS114FinalProject
             //JK testing
             int ycoord = 80;
             int count = 1;
+
+            if (LogicPR.possibleSchedules.Count < 1)
+            {
+                Label lbl = new Label();
+                lbl.Text = ("No schedules found");
+
+                lbl.Location = new Point(30, ycoord);
+                ycoord += 60;
+                lbl.AutoSize = true;
+                lbl.Font = new Font("Arial", 9, FontStyle.Bold);
+                lbl.ForeColor = Color.DarkSlateBlue;
+                lbl.Padding = new Padding(1);
+                this.Controls.Add(lbl);
+            }
+
             foreach (Schedule sched in LogicPR.possibleSchedules)
             {
+
+                
 
                 Label lbl = new Label();
                 lbl.Text = ("Option " + count + '\n' + sched.getNamesinOrder_string() + '\n'

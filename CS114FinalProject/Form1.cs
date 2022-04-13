@@ -120,7 +120,7 @@ namespace CS114FinalProject
 
                 foreach (Schedule sch in LogicPR.possibleSchedules)
                 {
-                    MessageBox.Show(sch.stringcourses);
+                    //MessageBox.Show(sch.stringcourses);
                 }
 
                 ScheduleResultsForm resultsForm = new ScheduleResultsForm();
