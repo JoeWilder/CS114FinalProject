@@ -22,11 +22,11 @@ namespace CS114FinalProject
 {
     public partial class WebbrowserForm : Form
     {
-        private string courseSearchName = "";
+        private string courseSearchName = ""; // search for this subject inputted by the user
         private string courseData; // Raw data about a course
         private List<SNHUcourse> courseList = new List<SNHUcourse>(); // List of SNHU courses
-        private int pageNumber = 0;
-        private List<string> listOfMajors = new List<string>();
+        private int pageNumber = 0; // what page of the website we are on
+        private List<string> listOfMajors = new List<string>(); // list of majors
 
 
         /* Create the form */
@@ -100,7 +100,7 @@ namespace CS114FinalProject
                 if (tag.Id == null) continue;
                 if (tag.Id.StartsWith("titl"))
                 {
-                    string id = "";
+                    string id = ""; // html tag that will be used to target course info
                     foreach (char c in tag.Id)
                     {
                         if (Char.IsDigit(c))
@@ -111,7 +111,7 @@ namespace CS114FinalProject
                     id = id.Insert(1, "-");
                     id = id + "__";
                     id = id.Insert(0, "tbod");
-                    string majorString = Regex.Replace(tag.GetAttribute("groupstring"), @"[\d%-]", string.Empty);
+                    string majorString = Regex.Replace(tag.GetAttribute("groupstring"), @"[\d%-]", string.Empty); // parsed html id
                     majorString = majorString.TrimStart('b');
                     majorString = majorString.TrimEnd('b');
 
@@ -199,7 +199,7 @@ namespace CS114FinalProject
                 if (tag.Id == null) continue;
                 if (tag.Id.StartsWith("titl"))
                 {
-                    string id = "";
+                    string id = ""; // html tag that will be used to target course info 
                     foreach (char c in tag.Id)
                     {
                         if (Char.IsDigit(c))
@@ -210,7 +210,7 @@ namespace CS114FinalProject
                     id = id.Insert(1, "-");
                     id = id + "__";
                     id = id.Insert(0, "tbod");
-                    string majorString = Regex.Replace(tag.GetAttribute("groupstring"), @"[\d%-]", string.Empty);
+                    string majorString = Regex.Replace(tag.GetAttribute("groupstring"), @"[\d%-]", string.Empty); // parsed html id
                     majorString = majorString.TrimStart('b');
                     majorString = majorString.TrimEnd('b');
                     listOfMajors.Add(majorString);
@@ -229,18 +229,21 @@ namespace CS114FinalProject
         }
 
 
+        /* Set what course to search for */
         public void setCourseSearchName(string courseName)
         {
             courseSearchName = courseName;
         }
 
 
+        /* Return what course to search for */
         public string getCourseSearchName()
         {
             return courseSearchName;
         }
 
 
+        /* Return what page we are on */
         public int getPageNumber()
         {
             return pageNumber;
